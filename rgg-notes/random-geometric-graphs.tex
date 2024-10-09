@@ -1,0 +1,263 @@
+\documentclass{article} 
+
+\usepackage[most]{tcolorbox}
+\usepackage{enumerate}
+\usepackage[a4paper, margin=1in]{geometry} 
+\usepackage{titling}
+\usepackage{amssymb}
+\usepackage{lipsum}
+\usepackage{mathtools}
+\usepackage{amsthm} % For proof environments only, labelling of thms done with custom counter
+
+%%% Misc commands %%%
+\newcommand\iidsim{\stackrel{\mathclap{\tiny\mbox{i.i.d}}}{\sim}}
+\newcommand{\indep}{\perp\!\!\!\!\perp} 
+
+\setlength{\parindent}{0pt} % Remove indentation upon new paragraph. 
+
+%%% Title page information %%%
+\title{Random Geometric Graphs}
+\author{Jacob Green}
+\date{\today}
+\newcommand{\subtitle}{A collection of notes from my time working under the supervision of Mathew Penrose on 
+random geometric graph theory and related topics.}
+\newcommand{\institution}{Department of Mathematical Sciences, The University of Bath}
+\newcommand{\keywords}{Random geometric graphs, Poisson Point Processes}
+
+\newcounter{globaltcb} % tcolorbox counter, for ease of self-reference
+
+\newtcolorbox{definition}[2][use counter=globaltcb, number within=section]{
+  colback=black!5!white, 
+  colframe=black!50!white, 
+  fonttitle=\bfseries, 
+  coltitle=black,
+  title=Definition \arabic{section}.\arabic{globaltcb} (#2), 
+  before upper={\refstepcounter{globaltcb}},
+  #1, % Optional params
+}
+
+\newtcolorbox{lemma}[2][use counter=globaltcb, number within=section]{
+  colback=blue!5!white, 
+  colframe=blue!50!white, 
+  fonttitle=\bfseries, 
+  coltitle=black, 
+  title=Lemma \arabic{section}.\arabic{globaltcb} (#2), 
+  before upper={\refstepcounter{globaltcb}},
+  #1, % Optional params
+}
+
+\newtcolorbox{example}[2][use counter=globaltcb, number within=section]{
+  colback=green!5!white, 
+  colframe=green!50!white, 
+  fonttitle=\bfseries, 
+  coltitle=black, 
+  title=Example \arabic{section}.\arabic{globaltcb} (#2), 
+  before upper={\refstepcounter{globaltcb}},
+  #1, % Optional params
+}
+
+\newtcolorbox{theorem}[2][use counter=globaltcb, number within=section]{
+  colback=red!5!white,
+  colframe=red!50!white, 
+  fonttitle=\bfseries, 
+  coltitle=black, 
+  title=Theorem \arabic{section}.\arabic{globaltcb} (#2), 
+  before upper={\refstepcounter{globaltcb}},
+  #1, % Optional params
+}
+
+\newtcolorbox{proposition}[2][use counter=globaltcb, number within=section]{
+  colback=blue!5!white,
+  colframe=blue!50!white, 
+  fonttitle=\bfseries, 
+  coltitle=black, 
+  title=Proposition \arabic{section}.\arabic{globaltcb} (#2), 
+  before upper={\refstepcounter{globaltcb}},
+  #1, % Optional params
+}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    % Adding an image (optional)
+    
+    % Title
+    {\Huge \bfseries \thetitle \par}
+    \vspace{0.5cm}
+    
+    % Subtitle (if any)
+    {\Large \subtitle \par}
+    \vspace{1cm}
+    
+    % Author and institution
+    {\large \theauthor \par}
+    {\institution \par}
+    \vspace{1cm}
+    
+    % Date
+    {\large \thedate \par}
+    \vspace{1.5cm}
+    
+    % Abstract section
+    \begin{abstract}
+        \lipsum[10]
+    \end{abstract}
+    \vspace{1cm}
+    
+    % Keywords section
+    \textbf{Keywords:} \keywords
+    \vfill % Pushes the following content to the bottom
+    
+    % Footer or further information
+    \textit{}
+\end{titlepage}
+
+\newpage
+
+\tableofcontents 
+
+\newpage 
+
+\setcounter{page}{1} % Start page numbering from 1 after title page
+
+\section{Introduction}
+
+\setcounter{globaltcb}{1} % Reset box counter.
+
+\subsection{What is a random geometric graph?}
+
+\begin{definition}[]{geometric graph}
+    Let $\mathcal{X} \subset \mathbb{R}^d$ be a finite collection of points and $r > 0$. The {\it geometric graph}
+    $G(\mathcal{X}, r)$ is the graph with vertex set $\mathcal{X}$ and edge set $\{\{x, y\} \subset \mathcal{X} 
+    \; : \; \lvert x - y \rvert \leq r\}$, where $\lvert \cdot \rvert$ denotes the Euclidean norm. 
+\end{definition}
+
+We can turn this into a random graph by letting the set $\mathcal{X} \subset \mathbb{R}^d$ be random. The resulting
+structure $G(\mathcal{X}, r)$ is said to be the {\it random geometric graph} (A.K.A the {\it Gilbert graph}). The first 
+structure we'll consider is found by uniformly scattering $n$ points in the $d$-dimensional hypercube $[0,1]^d$. 
+
+\begin{example}[]{fixed scale geometric graph}
+    Let $\xi_1, \xi_2, \dots \iidsim \text{Unif}[0,1]^d$ and fix a sequence $(r_n)_{n \geq 1}$ in $\mathbb{R}_{>0}$.
+    Let $\mathcal{X}_n := \{\xi_1, \dots, \xi_n\}$. Then $G(\mathcal{X}_n, r_n)$ is the {\it fixed scale geometric 
+    graph} at time $n \geq 1$.
+\end{example}
+
+We will also consider what happens when the number of vertices is Poisson.
+
+\begin{example}[]{Poisson scale geometric graph}
+    Let $\xi_1, \xi_2, \dots \iidsim \text{Unif}[0,1]^d$ and $N_n \sim \text{Poisson}(n)$ for $n \geq 1$ be independent 
+    of $(\xi_1, \xi_2, \dots)$. Let $\mathcal{P}_n := \{\xi_1, \dots, \xi_{N_n}\}$ and fix a sequence $(r_n)_{n \geq 1}$
+    in $\mathbb{R}_{> 0}$. Then the random geometric graph $G(\mathcal{P}_n, r_n)$ is the $d$-dimensional {\it Poisson 
+    scale geometric graph} at time $n \geq 1$. 
+\end{example}
+
+As one may expect, the vertices of this graph form a Poisson point process in $\mathbb{R}^d$. This was originally 
+an exercise (1.1) in \cite{Penrose_et_al_2016}.
+
+\begin{proposition}[]{$\mathcal{P}_n(\cdot)$ is a Poisson point process}
+    Let $\mathcal{P}_n$ be the vertex set in the Poisson scale geometric graph. Then $\mathcal{P}_n(\cdot): A \mapsto 
+    |\mathcal{P}_n \cap A|$, where $A \subset [0,1]^d$ is measurable and $|\cdot|$ is the counting measure, is a 
+    {\it Poisson point process} with intensity $\lambda(A)$, $\lambda(\cdot)$ the Lebesgue measure on $\mathbb{R}^n$.
+\end{proposition}
+
+See Appendix A for the definition of the Poisson point process. 
+
+\begin{proof}
+Write $\mathcal{P}_n(A_j) = \sum_{i=1}^{N_n} {\bf 1}\{\xi_i \in A_j\}$. Then, conditioning on $\{N_n = m\}$, each 
+$\mathcal{P}_n(A_j)$ is a $\text{Binom}(m, \lambda(A_j))$ random variable, making the joint distribution (also 
+conditioned on $\{N_n = m\}$) a $\text{Multinom}(m, \lambda(A_1), \dots, \lambda(A_k))$. Thus one has 
+\begin{align*}\mathbb{P}(\mathcal{P}_n(A_1) = a_1, \dots, \mathcal{P}_n(A_k) = a_k) &= 
+\underbrace{\left(\frac{e^{-n}n^m}{m!}\right)}_{\text{Poisson}(n ; m)} \quad \times 
+\underbrace{\binom{m}{j_1, \dots, j_k}\prod_{i=1}^k {(\lambda(A_i))}^{j_i}}_{\text{Multinom}(m, \lambda(A_1), \dots, \lambda(A_k) ; j_1, \dots, j_k)} \\
+&= \prod_{i=1}^k \frac{e^{-n\lambda(A_i)}(n\lambda(A_i))^{j_i}}{(j_i)!}
+\end{align*}
+which is a product of the distributions $\text{Poisson}(n\lambda(A_i)), 1 \leq i \leq k$, giving us both of our 
+defining properties of a Poisson point process. 
+\end{proof}
+
+An exercise (1.2) in \cite{Penrose_et_al_2016} states the following result, which we'll prove in a (somewhat?) 
+analogous way.
+
+\begin{proposition}[]{expected degree of first vertex in fixed scale RGG}
+    Consider the fixed scale random geometric graph $G(\mathcal{X}_n, r_n)$ with $r_n \to 0$ as $n \to \infty$. Let 
+    $D_{1, n}$ be the degree of the first vertex $\xi_1$. Prove that $\mathbb{E}[D_{1, n}] \sim \theta n r_n^d$
+\end{proposition}
+
+\begin{proof}
+Write $D_{1,n} = \sum_{i = 2}^{n} {\bf 1}\{\lvert \xi_1 - \xi_i \rvert \leq r\}$, then by the $\xi_i$ being i.i.d 
+uniformly in $[0,1]^d$ we have $D_{1,n} \sim \text{Binom}(n-1, p)$ where $p$ is the probability of a given $\xi_i, i \geq 2$ 
+being within $r_n$ of $\xi_1$. By the uniformity of the $\xi_i$ this is computed as $p = \lambda(B_{r_n}(\xi_1)
+\cap [0,1]^d)$ where $B_{r_n}(\xi_1)$ is the hypersphere radius $r_n$ centred at $\xi_1$ and $\lambda$ the 
+Lebesgue measure on $\mathbb{R}^d$. Now, conditioning on $\xi_1$, we have 
+\[\mathbb{E}[D_{1,n} | \xi_1 = v] = (n-1)\lambda(B_{r_n}(v) \cap [0,1]^d) \sim \theta n r_n^d\]
+where the asymptotic equality follows from noting that $n$ sufficiently large forces $B_{r_n}(v) \subset [0,1]^d$ 
+by $r_n \to 0$. Note $\theta$ depends on $d$, and is the coefficient of the volume of the $d$-dimensional hypersphere
+radius $r_n$. Finally, by taking the expectation over $\xi_1$ and applying the total law of expectations 
+we obtain $\mathbb{E}[D_{1,n}] \sim \theta n r_n^d$ by noting the independence of $v$ on our asymptotic expression 
+for $\mathbb{E}[D_{1, n} | \xi_1 = v]$.
+\end{proof}
+
+\subsection{Counting Edges of $G(\mathcal{X}_n, r_n)$ and $G(\mathcal{P}_n, r_n)$}
+
+The number of edges $\mathcal{E}_n, \mathcal{E}_n^\prime$ in $G(\mathcal{X}_n, r_n)$ and $G(\mathcal{P}_n, r_n)$ respectively 
+is a Poisson random variable. To prove this, we'll use the so called {\it dependency graph}. For a more detailed treatment 
+of thiese consult Appendix B.  
+
+\begin{definition}[]{dependency graph}
+    Let $(V, \sim)$ be a finite simple graph w/ edge relation $\sim$ and vertex set $V$. We say $(V, \sim)$ is a 
+    {\it dependency graph} for the random variables $(W_\alpha)_{\alpha \in V}$ if whenever $A, B \subset V$ are 
+    disjoint with no $\alpha \in A$, $\beta \in B$ such that $\alpha \sim \beta$ (i.e. $A$ and $B$ lie in unique 
+    connected components) then \[(W_\alpha)_{\alpha \in A} \indep (W_\beta)_{\beta \in B} \quad \text{i.e. are independent}\]
+\end{definition}
+
+From \cite{Penrose_2003} (Theorem 2.1), we have the following result concerning dependency graphs of finite 
+Bernoulli collections.
+
+\begin{lemma}[]{Poisson approximation lemma for Bernoulli sums}
+    Let $(\xi_i)_{i \in I}$ be a finite collection of Bernoulli random variables with dependency graph $(I, \sim)$. 
+    Set $p_i := \mathbb{P}(\xi_i = 1)$, $p_{ij} := \mathbb{P}(\xi_i = 1 ; \xi_j = 1)$ and suppose $\lambda := 
+    \sum_{i \in I}p_i$ is finite. Then, letting $W := \sum_{i \in I}\xi_i$, we have (LHS is just total variation distance)
+    \[\sup_{A \subseteq \mathbb{Z}} \bigg|\mathbb{P}[W \in A] - \mathbb{P}(\text{Po}(\lambda)\in A)\bigg| \leq 
+    \min \{3, \lambda^{-1}\} \left(\sum_{i \in I}\sum_{\mathcal{N}(i) \setminus \{i\}}p_{ij} + 
+    \sum_{i \in I}\sum_{j \in \mathcal{N}(i)}p_ip_j\right)\]
+\end{lemma}
+
+\newpage
+
+\section{Appendices}
+
+\subsection{Appendix A: Poisson Point Processes}
+
+For a full treatment, consult \cite{Last_Penrose_2017}. Here I will simply give the relevent definitions and 
+results from this text, leaving proofs (unless containing a particularly important idea) to \cite{Last_Penrose_2017}.
+
+\begin{definition}[]{point process}
+    Let $(\mathbb{X}, \mathcal{X})$ be a measure space and let ${\bf N}(\mathbb{X}) \equiv {\bf N}$ be the family 
+    of measures that can be written as a countable sum of finite measures on $\mathbb{X}$ with image in $\mathbb{N}_0$. 
+    Let ${\bf \mathcal{N}}(\mathbb{X}) \equiv {\bf \mathcal{N}}$ be the $\sigma$-algebra generated by the collection 
+    of subsets $\{\mu \in {\bf N} : \mu(A) = k\}$ over $A \in \mathcal{X}, k \in \mathbb{N}_0$. A {\it point process}
+    on $\mathbb{X}$ is a random element $\eta$ of the measure space $({\bf N}, {\bf \mathcal{N}})$
+\end{definition}
+
+\begin{definition}[]{Poisson point process}
+    Let $\mathbb{X}$ be a space and $\lambda$ an s-finite measure on $\mathbb{X}$. A {\it Poisson point process} 
+    with intensity measure $\lambda$ is a point process $\eta$ on $\mathbb{X}$ with
+    \begin{enumerate}[(i)]
+        \item $\eta(A) \sim \text{Poisson}(\lambda(A))$, that is $\eta(A)$ is Poisson with parameter $\lambda(A)$
+        \item If $A_1, \dots, A_n \in \mathbb{X}$ are pairwise disjoint then $\eta(A_1), \dots, \eta(A_n)$ 
+        are independent.
+    \end{enumerate}
+\end{definition}
+
+\newpage
+
+\subsection{Appendix B: Dependency graphs}
+
+\newpage
+
+%%% References
+\bibliographystyle{plain}
+\bibliography{refs} 
+
+\end{document} 

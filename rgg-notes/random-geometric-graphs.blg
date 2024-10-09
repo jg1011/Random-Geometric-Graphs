@@ -1,0 +1,50 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: random-geometric-graphs.aux
+Reallocating 'name_of_file' (item size: 1) to 6 items.
+The style file: plain.bst
+Reallocating 'name_of_file' (item size: 1) to 5 items.
+Database file #1: refs.bib
+Warning--can't use both author and editor fields in Penrose_et_al_2016
+You've used 3 entries,
+            2118 wiz_defined-function locations,
+            518 strings with 4554 characters,
+and the built_in function-call counts, 830 in all, are:
+= -- 75
+> -- 43
+< -- 0
++ -- 17
+- -- 14
+* -- 50
+:= -- 153
+add.period$ -- 11
+call.type$ -- 3
+change.case$ -- 13
+chr.to.int$ -- 0
+cite$ -- 4
+duplicate$ -- 36
+empty$ -- 67
+format.name$ -- 14
+if$ -- 171
+int.to.chr$ -- 0
+int.to.str$ -- 3
+missing$ -- 6
+newline$ -- 18
+num.names$ -- 6
+pop$ -- 23
+preamble$ -- 1
+purify$ -- 13
+quote$ -- 0
+skip$ -- 19
+stack$ -- 0
+substring$ -- 15
+swap$ -- 4
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 6
+warning$ -- 1
+while$ -- 6
+width$ -- 4
+write$ -- 34
+(There was 1 warning)
