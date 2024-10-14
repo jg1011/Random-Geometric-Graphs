@@ -1,6 +1,7 @@
 \documentclass{article} 
 
 \usepackage[most]{tcolorbox}
+\usepackage{xcolor}
 \usepackage{enumerate}
 \usepackage[a4paper, margin=1in]{geometry} 
 \usepackage{titling}
@@ -11,6 +12,8 @@
 
 %%% Misc commands %%%
 \newcommand\iidsim{\stackrel{\mathclap{\tiny\mbox{i.i.d}}}{\sim}}
+\newcommand\indist{\stackrel{\mathclap{\tiny\mbox{$\mathcal{D}$}}}{\longrightarrow}}
+\newcommand\nidist{\stackrel{\mathclap{\tiny\mbox{$\mathcal{D}$}}}{\longleftarrow}}
 \newcommand{\indep}{\perp\!\!\!\!\perp} 
 
 \setlength{\parindent}{0pt} % Remove indentation upon new paragraph. 
@@ -25,6 +28,8 @@ random geometric graph theory and related topics.}
 \newcommand{\keywords}{Random geometric graphs, Poisson Point Processes}
 
 \newcounter{globaltcb} % tcolorbox counter, for ease of self-reference
+\newcounter{claimcount} % Used for proof with lots of claims
+
 
 \newtcolorbox{definition}[2][use counter=globaltcb, number within=section]{
   colback=black!5!white, 
@@ -67,13 +72,39 @@ random geometric graph theory and related topics.}
 }
 
 \newtcolorbox{proposition}[2][use counter=globaltcb, number within=section]{
-  colback=blue!5!white,
-  colframe=blue!50!white, 
+  colback=purple!5!white,
+  colframe=purple!50!white, 
   fonttitle=\bfseries, 
   coltitle=black, 
   title=Proposition \arabic{section}.\arabic{globaltcb} (#2), 
   before upper={\refstepcounter{globaltcb}},
   #1, % Optional params
+}
+
+\newtcolorbox{corollary}[2][use counter=globaltcb, number within=section]{
+  colback=yellow!5!white,
+  colframe=yellow!50!white, 
+  fonttitle=\bfseries, 
+  coltitle=black, 
+  title=Corollary \arabic{section}.\arabic{globaltcb} (#2), 
+  before upper={\refstepcounter{globaltcb}},
+  #1, % Optional params
+}
+
+\newtcolorbox[use counter=claimcount]{claim}[1][]{%
+    colback=green!10, 
+    colframe=green!50!black, 
+    coltitle=black, 
+    fonttitle=\bfseries, 
+    boxrule=0.5mm, 
+    colbacktitle=green!30,
+    enhanced, % Allows additional options
+    boxed title style={sharp corners}, 
+    attach title to upper={},
+    titlerule=0mm, 
+    title=Claim: $\;$,
+    before=\par\smallskip\noindent, 
+    #1
 }
 
 \begin{document}
@@ -176,33 +207,51 @@ which is a product of the distributions $\text{Poisson}(n\lambda(A_i)), 1 \leq i
 defining properties of a Poisson point process. 
 \end{proof}
 
-An exercise (1.2) in \cite{Penrose_et_al_2016} states the following result, which we'll prove in a (somewhat?) 
-analogous way.
+The exercise (1.2) in \cite{Penrose_et_al_2016} states the following result, which we'll prove in an analogous way.
 
-\begin{proposition}[]{expected degree of first vertex in fixed scale RGG}
+\begin{proposition}[]{expected degree of $k^\text{th}$ vertex in fixed scale RGG}
     Consider the fixed scale random geometric graph $G(\mathcal{X}_n, r_n)$ with $r_n \to 0$ as $n \to \infty$. Let 
-    $D_{1, n}$ be the degree of the first vertex $\xi_1$. Prove that $\mathbb{E}[D_{1, n}] \sim \theta n r_n^d$
+    $D_{k, n}$ be the degree of the first vertex $\xi_k$. Prove that $\mathbb{E}[D_{k, n}] \sim \theta n r_n^d$
 \end{proposition}
 
 \begin{proof}
-Write $D_{1,n} = \sum_{i = 2}^{n} {\bf 1}\{\lvert \xi_1 - \xi_i \rvert \leq r\}$, then by the $\xi_i$ being i.i.d 
-uniformly in $[0,1]^d$ we have $D_{1,n} \sim \text{Binom}(n-1, p)$ where $p$ is the probability of a given $\xi_i, i \geq 2$ 
-being within $r_n$ of $\xi_1$. By the uniformity of the $\xi_i$ this is computed as $p = \lambda(B_{r_n}(\xi_1)
-\cap [0,1]^d)$ where $B_{r_n}(\xi_1)$ is the hypersphere radius $r_n$ centred at $\xi_1$ and $\lambda$ the 
-Lebesgue measure on $\mathbb{R}^d$. Now, conditioning on $\xi_1$, we have 
-\[\mathbb{E}[D_{1,n} | \xi_1 = v] = (n-1)\lambda(B_{r_n}(v) \cap [0,1]^d) \sim \theta n r_n^d\]
-where the asymptotic equality follows from noting that $n$ sufficiently large forces $B_{r_n}(v) \subset [0,1]^d$ 
-by $r_n \to 0$. Note $\theta$ depends on $d$, and is the coefficient of the volume of the $d$-dimensional hypersphere
-radius $r_n$. Finally, by taking the expectation over $\xi_1$ and applying the total law of expectations 
-we obtain $\mathbb{E}[D_{1,n}] \sim \theta n r_n^d$ by noting the independence of $v$ on our asymptotic expression 
-for $\mathbb{E}[D_{1, n} | \xi_1 = v]$.
+Write $D_{k,n} = \sum_{i \neq k} {\bf 1}\{\lvert \xi_k - \xi_i \rvert \leq r\}$, then we have $D_{k,n} \sim 
+\text{Binom}(n-1, p)$ with \[p = \lambda(B_{r_n}(\xi_k) \cap [0,1]^d)\] where $B_{r_n}(\xi_k)$ is the hypersphere 
+radius $r_n$ centred at $\xi_k$ and $\lambda$ the Lebesgue measure on $\mathbb{R}^d$. Now, conditioning on $\xi_k$, 
+we have \[\mathbb{E}[D_{k,n} | \xi_k] = (n-1)\lambda(B_{r_n}(\xi_k) \cap [0,1]^d)\]
+and hence, by the total law of expectation, 
+\begin{align*}
+    \mathbb{E}[D_{k,n}] &= \mathbb{E}[\mathbb{E}[D_{k,n} | \xi_k]] \\
+    &= (n-1)\int_{[0,1]^d}\lambda(B_{r_n}(\xi_k) \cap [0,1]^d)\mathrm{d}\xi_k \\
+    &\sim n\int_{[0,1]^d}\lambda(B_{r_n}(\xi_k))\mathrm{d}\xi_k \sim n(\theta r_n^d)
+\end{align*}
+Where the first asymptotic equality follows via the dominated convergence theorem (to see this, observe $B_{r_n}(\xi_k) \cap [0,1]^d 
+\to B_{r_n}(\xi_k)$ A.E. and $B_{r_n}(\xi_k)$ also dominating). Note $\theta$ is a constant depending on $d$, 
+and is the coefficient of $r_n^d$ in the formula for the volume of a hypersphere radius $r_n$.
 \end{proof}
 
 \subsection{Counting Edges of $G(\mathcal{X}_n, r_n)$ and $G(\mathcal{P}_n, r_n)$}
 
 The number of edges $\mathcal{E}_n, \mathcal{E}_n^\prime$ in $G(\mathcal{X}_n, r_n)$ and $G(\mathcal{P}_n, r_n)$ respectively 
-is a Poisson random variable. To prove this, we'll use the so called {\it dependency graph}. For a more detailed treatment 
-of thiese consult Appendix B.  
+is a Poisson random variable. To prove this, we'll use a so called {\it dependency graph}. We handle the two 
+RGGs $G(\mathcal{X}_n, r_n)$ and $G(\mathcal{P}_n, r_n)$ seperately. 
+
+\subsubsection*{Counting edges of $G(\mathcal{X}_n, r_n)$}
+
+An elementary question to ask is "what is the expected edge count at time $n$?". Via the previously derived 
+vertex degree asymptotics, we have an easy asymptotic result.  
+
+\begin{proposition}[]{expected edge count in fixed scale RGG}
+    Let $\mathcal{E}_n$ and $\mathcal{E}^\prime_n$ be the number of edges in $G(\mathcal{X}_n, r_n)$ and 
+    $G(\mathcal{P}_n, r_n)$ respectively. Then,
+    \[\mathbb{E}[\mathcal{E}_n] \sim \theta n^2 r_n^d / 2\]
+\end{proposition}
+
+\begin{proof}[Proof of lemma]
+    By the handshaking lemma we have $2\mathbb{E}[\mathcal{E}_n] = \sum_{k = 1}^n \mathbb{E}[D_{k, n}] \sim n^2 r_n^d$. 
+\end{proof}
+
+Now we introduce the {\it dependency graph}. 
 
 \begin{definition}[]{dependency graph}
     Let $(V, \sim)$ be a finite simple graph w/ edge relation $\sim$ and vertex set $V$. We say $(V, \sim)$ is a 
@@ -211,17 +260,144 @@ of thiese consult Appendix B.
     connected components) then \[(W_\alpha)_{\alpha \in A} \indep (W_\beta)_{\beta \in B} \quad \text{i.e. are independent}\]
 \end{definition}
 
-From \cite{Penrose_2003} (Theorem 2.1), we have the following result concerning dependency graphs of finite 
-Bernoulli collections.
+When we take the random variable associated with each vertex to be 0-1, we obtain the following bound. 
 
 \begin{lemma}[]{Poisson approximation lemma for Bernoulli sums}
     Let $(\xi_i)_{i \in I}$ be a finite collection of Bernoulli random variables with dependency graph $(I, \sim)$. 
     Set $p_i := \mathbb{P}(\xi_i = 1)$, $p_{ij} := \mathbb{P}(\xi_i = 1 ; \xi_j = 1)$ and suppose $\lambda := 
     \sum_{i \in I}p_i$ is finite. Then, letting $W := \sum_{i \in I}\xi_i$, we have (LHS is just total variation distance)
-    \[\sup_{A \subseteq \mathbb{Z}} \bigg|\mathbb{P}[W \in A] - \mathbb{P}(\text{Po}(\lambda)\in A)\bigg| \leq 
-    \min \{3, \lambda^{-1}\} \left(\sum_{i \in I}\sum_{\mathcal{N}(i) \setminus \{i\}}p_{ij} + 
+    \[\sum_{k \geq 0} \bigg|\mathbb{P}[W = k] - \mathbb{P}(\text{Po}(\lambda) = k)\bigg| \leq 
+    \min \{6, 2\lambda^{-1}\} \left(\sum_{i \in I}\sum_{\mathcal{N}(i) \setminus \{i\}}p_{ij} + 
     \sum_{i \in I}\sum_{j \in \mathcal{N}(i)}p_ip_j\right)\]
 \end{lemma}
+
+\begin{proof}
+    Omitted, consult \cite{Penrose_2003}.
+\end{proof}
+
+\begin{theorem}[]{total variation between edge and Poisson distribution}
+    Let $\lambda_n := \mathbb{E}[\mathcal{E}_n]$. Then 
+    \[\sum_{k \geq 0} | \mathbb{P}(\mathcal{E}_n = k) - \mathbb{P}(\text{Po}(\lambda_n) = k) | = O(nr^d)\]
+\end{theorem}
+
+\setcounter{claimcount}{1} % Using claims, reset the count
+
+The idea of this proof is to write $\mathcal{E}_n = \sum_{1 \leq i < j \leq n} {\bf 1}\{\lvert \xi_i - \xi_j \rvert \leq r_n\}$,
+i.e. the number of edges as the sum of the indicators over all possible edges indicating whether this edge 
+exists. This has a rather obvious dependency graph and hence we can apply the Poisson approximation lemma (1.7)
+with some work on the asymptotics.
+
+\begin{proof}
+Let $V \{\{i, j\} : 1 \leq i < j \leq\}$ and define $\sim$ by $\alpha \sim \beta$ if $\alpha \cap \beta \neq \emptyset$ 
+and $\alpha \neq \beta$. Define the random variables $W_\alpha = {\bf 1}\{\lvert \xi_i - \xi_j \rvert \leq r_n\}$ for 
+$\alpha \in V$ and let $\lambda_n := \sum_{\alpha \in V}p_\alpha$.
+
+\begin{claim}[]{}
+    $G(V, \sim)$ is a dependency graph for $(W_\alpha)_{\alpha \in V}$.
+\end{claim}
+
+\begin{proof}[Proof of claim]
+    Follows immediately from the independence of the $\xi_i$.
+\end{proof}
+
+Let $p_\alpha := \mathbb{P}(W_\alpha = 1)$ and $p_{\alpha \beta} := \mathbb{P}(W_\alpha = 1 ; W_\beta = 1)$, as in 
+the setup of lemma 1.7.
+
+\begin{claim}[]{}
+    $p_\alpha \sim \theta r_n^d$
+\end{claim}
+
+\begin{proof}[Proof of claim]
+    Fix $\alpha = \{i, j\} \in V$. Then, letting $\lambda(\cdot)$ be the Lebesgue measure on $\mathbb{R}^d$, 
+    \begin{align*}
+        p_\alpha = \mathbb{P}(\lvert \xi_i - \xi_j \rvert \leq r_n) 
+        &= \int_{v \in [0,1]^d} \mathbb{P}(\lvert \xi_i - \xi_j \rvert \leq r_n | \xi_i = v)\mathrm{d}v \\ 
+        &= \int_{v \in [0,1]^d} \lambda(B_{r_n}(v) \cap [0,1]^d) \mathrm{d}v \\
+        &\sim \int_{v \in [0,1]^d} \lambda(B_{r_n}(v))\mathrm{d}v \sim \theta r_n^d
+    \end{align*}
+    where the first asymptotic equality follows from the dominated convergence theorem.
+\end{proof}
+
+\begin{claim}[]{}
+    $p_{\alpha \beta} \sim (\theta r_n^d)^2$
+\end{claim}
+
+\begin{proof}[Proof of claim]
+    An analogous argument works. 
+\end{proof}
+
+Now we have all our ingredients, lets cook. Observe, from the previously computed asymptotics, 
+\[\lambda_n \sim n^2\theta r_n^d/2 \quad \text{and} \quad \sum_{\alpha \in V}p_\alpha^2 \sim \theta \lambda_n r_n^d\]
+and hence by counting $|\mathcal{N}(\alpha)| = 2(n-2)$, obtain 
+\[\sum_{\alpha \in V}\sum_{\beta \sim \alpha}(p_{\alpha \beta} + p_\alpha p_\beta) \sim 
+\binom{n}{2} \times 2(n-2) \times 2(\theta r_n^d)^2 = O(n\lambda_n r_n^d)\]
+which by the Poisson approximation lemma gives
+\[\sum_{k \geq 0}|\mathbb{P}(\mathcal{E}_n = k) - e^{-\lambda_n}\lambda_n^k/k!| = O(nr_n^d)\]  
+as claimed. 
+\end{proof}
+
+\begin{corollary}[]{edge distribution of the fixed scale random geometric graph}
+    If the limit $\lambda_n \to \lambda \in (0,\infty)$ exists and $nr_n^d \to 0$, then 
+    $\mathcal{E}_n \indist \text{Poisson}(\lambda)$
+\end{corollary}
+
+\begin{proof}
+    By proposition 1.6, we have $\lambda \sim \lambda_n \sim \theta n^2 r_n^d/2 \Rightarrow n^2 r_n^d \sim 2\lambda/\theta 
+    \in (0, \infty)$ which forces $n r_n^d \to 0$ and hence lemma 1.8 applies giving $\mathcal{E}_n \indist \text{Poisson}(\lambda)$.
+\end{proof}
+
+\subsubsection*{Counting edges of $G(\mathcal{P}_n, r_n)$}
+
+We now spend the rest of the section proving similar results for $G(\mathcal{P}_n, r_n)$. Before proceeding we have
+the following lemma from \cite{Penrose_et_al_2016}. We write $\mathcal{P}_{< \infty}(A)$ for the family of finite subsets of $A$. 
+
+\begin{lemma}[]{Mecke formula}
+    Let $k \in \mathbb{N}$. For any measurable $f: (\mathbb{R}^d)^k \times \mathcal{P}_{< \infty}([0,1]^d) \to \mathbb{R}$, 
+    when the expectation exists, 
+    \[\mathbb{E}\sum_{X_1, \dots, X_k \in \mathcal{P}_n}^{\neq} f(X_1, \dots, X_k, \mathcal{P}_n \setminus \{X_1, \dots, X_n\})
+    = n^k \int \dots \int \mathbb{E}f(x_1, \dots, x_k, \mathcal{P}_n)\mathrm{d}x_1 \dots \mathrm{d}x_k\]
+    where $\sum^{\neq}$ denotes the sum over the ordered $k$-tuples of distinct points (in $\mathcal{P}_n$).
+\end{lemma}
+
+\begin{proof}
+The idea is to condition on the number of points in $\mathcal{P}_n$. Observe, 
+\begin{align*}
+    \mathbb{E}&\sum_{X_1, \dots, X_k \in \mathcal{P}_n}^{\neq} f(X_1, \dots, X_k, \mathcal{P}_n \setminus \{X_1, \dots, X_n\}) \\
+    &= \mathbb{E}\left[\mathbb{E}\left[\sum_{X_1, \dots, X_k \in \mathcal{P}_n}^{\neq} f(X_1, \dots, X_k, \mathcal{P}_n \setminus \{X_1, \dots, X_n\}) \bigg| |\mathcal{P}_n| = m\right]\right] \\
+    &= \sum_{m \geq k}\left(\frac{e^{-n}n^m}{m!}\right)\sum_{X_1, \dots, X_k \in \{\xi_1, \dots, \xi_m\}}^{\neq}\mathbb{E}f(X_1, \dots, X_k, \{X_{k+1}, \dots, X_{m}\}) \\
+    (\dagger) \qquad \qquad &= \sum_{m \geq k}\left(\frac{e^{-n}n^m}{m!}\right)\left(\prod_{i = 1}^{k}(m-i+1)\right)\mathbb{E}f(X_1, \dots, X_k, \{X_{k+1}, \dots, X_{m}\}) \\ 
+    &= \sum_{m \geq k}\left(\frac{e^{-n}n^m}{m!}\right)\left(\prod_{i = 1}^{k}(m-i+1)\right)\int_{[0,1]^d} \dots \int_{[0,1]^d} f(x_1, \dots, x_k, \{x_{k+1}, \dots, x_m\})\mathrm{d}x_1 \dots \mathrm{d}x_m \\
+    &= n^k \sum_{m \geq k}\left(\frac{e^{-n}n^{m-k}}{(m-k)!}\right) \int_{[0,1]^d} \dots \int_{[0,1]^d} f(x_1, \dots, x_k, \{x_{k+1}, \dots, x_m\})\mathrm{d}x_1 \dots \mathrm{d}x_m \\
+    &= n^k \int_{[0,1]^d} \dots \int_{[0,1]^d} f(x_1, \dots, x_k, \{x_{k+1}, \dots, x_m\})\mathrm{d}x_1 \dots \mathrm{d}x_m  \\
+    &= n^k \int_{[0,1]^d} \dots \int_{[0,1]^d} \mathbb{E}f(x_1, \dots, x_k, \mathcal{P}_n)\mathrm{d}x_1 \dots \mathrm{d}x_k
+\end{align*}
+Where $(\dagger)$ follows from the $\xi_i$ being i.i.d, so all expectations are equal and it suffices to count 
+distinct $k$-tuples in $\{\xi_1, \dots, \xi_m\}$. [CHECK THIS PROOF W/ PENROSE]
+\end{proof}
+
+We can now use this lemma to find the expected number of edges in $G(\mathcal{P}_n, r_n)$. 
+
+\begin{proposition}[]{expected edge count in Poisson scale RGG}
+    Let $G(\mathcal{P}_n, r_n)$ be the Poisson scale RGG and $\mathcal{E}_n$ be the number of edges at time $n$. Then, 
+    \[\mathbb{E}[\mathcal{E}_n] \sim \theta n^2 r_n^d / 2\]
+\end{proposition}
+
+\begin{proof}
+Write $\mathcal{E}_n = \frac{1}{2}\sum_{X_1, X_2 \in \mathcal{P}_n}^{\neq}{\bf 1}\{\lVert X_1 - X_2 \rVert \leq r_n\}$. Then 
+we can use Mecke's formula as follows. 
+\begin{align*}
+    \mathbb{E}[\mathcal{E}_n] &= \frac{1}{2}\mathbb{E}\left[\sum_{X_1, X_2 \in \mathcal{P}_n}^{\neq}{\bf 1}\{\lVert X_1 - X_2 \rVert \leq r_n\}\right] \\
+    (\text{Mecke}) \quad &= \frac{n^2}{2}\int_{[0,1]^d}\int_{[0,1]^d}\mathbb{E}[{\bf 1}\{\lVert x_1 - x_2 \rVert \leq r_n\}]\mathrm{d}x_1\mathrm{d}x_2 \\
+    &= \frac{n^2}{2}\int_{[0,1]^d}\int_{[0,1]^d}{\bf 1}\{\lVert x_1 - x_2 \rVert \leq r_n\}\mathrm{d}x_1\mathrm{d}x_2 \\
+    &= \frac{n^2}{2}\int_{[0,1]^d}\lambda(B(x_1, r_n) \cap [0,1]^d)\mathrm{d}x_1 \sim \theta n^2 r_n^d / 2
+\end{align*}
+where the final asymptotic equality follows from the dominated convergence theorem and volume of a $d$-dimensional 
+hypersphere. Note we have already seen the asymptotics for the final integral.
+\end{proof}
+
+Rest follows on from Exercise (2.2), too small brained to figure it out right now will attempt again tomorrow $:<$
+
+\subsection{A central limit theorem for our edge counts}
 
 \newpage
 
@@ -249,10 +425,6 @@ results from this text, leaving proofs (unless containing a particularly importa
         are independent.
     \end{enumerate}
 \end{definition}
-
-\newpage
-
-\subsection{Appendix B: Dependency graphs}
 
 \newpage
 

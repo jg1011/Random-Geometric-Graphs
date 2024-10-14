@@ -1,6 +1,6 @@
 \contentsline {section}{\numberline {1}Introduction}{1}{}%
 \contentsline {subsection}{\numberline {1.1}What is a random geometric graph?}{1}{}%
 \contentsline {subsection}{\numberline {1.2}Counting Edges of $G(\mathcal {X}_n, r_n)$ and $G(\mathcal {P}_n, r_n)$}{2}{}%
-\contentsline {section}{\numberline {2}Appendices}{3}{}%
-\contentsline {subsection}{\numberline {2.1}Appendix A: Poisson Point Processes}{3}{}%
-\contentsline {subsection}{\numberline {2.2}Appendix B: Dependency graphs}{4}{}%
+\contentsline {subsection}{\numberline {1.3}A central limit theorem for our edge counts}{5}{}%
+\contentsline {section}{\numberline {2}Appendices}{6}{}%
+\contentsline {subsection}{\numberline {2.1}Appendix A: Poisson Point Processes}{6}{}%
