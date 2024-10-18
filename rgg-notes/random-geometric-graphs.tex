@@ -30,7 +30,6 @@ random geometric graph theory and related topics.}
 \newcounter{globaltcb} % tcolorbox counter, for ease of self-reference
 \newcounter{claimcount} % Used for proof with lots of claims
 
-
 \newtcolorbox{definition}[2][use counter=globaltcb, number within=section]{
   colback=black!5!white, 
   colframe=black!50!white, 
@@ -257,7 +256,7 @@ Now we introduce the {\it dependency graph}.
     Let $(V, \sim)$ be a finite simple graph w/ edge relation $\sim$ and vertex set $V$. We say $(V, \sim)$ is a 
     {\it dependency graph} for the random variables $(W_\alpha)_{\alpha \in V}$ if whenever $A, B \subset V$ are 
     disjoint with no $\alpha \in A$, $\beta \in B$ such that $\alpha \sim \beta$ (i.e. $A$ and $B$ lie in unique 
-    connected components) then \[(W_\alpha)_{\alpha \in A} \indep (W_\beta)_{\beta \in B} \quad \text{i.e. are independent}\]
+    connected components) then \[(W_\alpha)_{\alpha \in A} \indep (W_\beta)_{\beta \in B} \quad \text{i.e. are independent families}\]
 \end{definition}
 
 When we take the random variable associated with each vertex to be 0-1, we obtain the following bound. 
@@ -399,6 +398,19 @@ Rest follows on from Exercise (2.2), too small brained to figure it out right no
 
 \subsection{A central limit theorem for our edge counts}
 
+\begin{lemma}[]{Falling factorial moment for the Poisson distribution}
+    Let $X \sim \text{Poisson}(\lambda)$ and fix $k \in \mathbb{N}$. Then $\mathbb{E}[X(X-1)\dots (X-k+1)] = \lambda^k$
+\end{lemma}
+
+\begin{proof}
+    This follows by the following simple calculation.
+    \begin{align*}
+        \mathbb{E}[&X(X-1)\cdots (X - k + 1)] = \sum_{x \geq 0}x(x-1)\cdots (x-k+1)\frac{e^{-\lambda}\lambda^x}{x!} \\ 
+        &= e^{-\lambda}\sum_{x \geq k}x(x-1)\cdots (x-k+1)\frac{\lambda^x}{x!} = \lambda^ke^{-\lambda}\sum_{x \geq k}
+        \frac{\lambda^{x-k}}{(x-k)!} = \lambda^k
+    \end{align*}
+\end{proof}
+
 \newpage
 
 \section{Appendices}
@@ -425,6 +437,184 @@ results from this text, leaving proofs (unless containing a particularly importa
         are independent.
     \end{enumerate}
 \end{definition}
+
+\newpage
+
+\subsection{Appendix B: Existence Of High Density Packings}
+
+Here I take some notes on chapter 7 of Pach $\&$ Agarwals combinatorial geometry [WILEY GIVES BAD CITATION], 
+hoping to find bridges between random geometric graphs and combinatorial geometry. \\ 
+
+As the title suggests, we spend this section looking for the existence of high density packings in $\mathbb{R}^d$. 
+We take a non construct approach, instead turning to the probabilistic method. For a convex body $C \subset \mathbb{R}^d$, 
+denote the maximal packing (respectively, minimal covering) density by $\delta(C)$ (respectively, $\vartheta(C)$). \\
+
+Let us first consider $C = B^d \subset \mathbb{R}^d$, the $d$-dimensional ball. Then one has the following easy 
+observation. 
+
+\begin{proposition}[]{easy lower bound for $\delta(B^d)$}
+    Let $B^d \subset \mathbb{R}$ be the $d$-dimensional unit ball. Then, 
+    \[\delta(B^d) \geq 2^{-d}\vartheta(B^d) \geq 2^{-d}\]
+\end{proposition}
+
+\begin{proof}
+    The latter inequality is trivial ($\vartheta(C) \geq 1$). For the former, let us consider a {\it saturated 
+    packing} $\mathcal{B} = \{B^d + c_i | i \in \mathbb{N}\}$ (that is, a packing such that 
+    no body can be added without intersecting a pre-existing body) and the factor 2 enlargement 
+    $\mathcal{B}^\prime = \{2B^d + c_i | i \in \mathbb{N}\}$.
+    \begin{claim}
+        $\mathcal{B}^\prime$ is a covering of $\mathbb{R}^d$.
+    \end{claim}
+    \begin{proof}[Proof of claim]
+        Suppose $x \notin \cup_{B \in \mathcal{B}^\prime} B$. Then we have $\lvert x - c_i \rvert > 2$ for each $i \geq 1$, 
+        which gives \[(B^d + c_i) \cap (B^d + x) = \emptyset, \quad i \geq 1\] Contradiction!
+    \end{proof}
+    Hence, letting $d(C, \mathbb{R}^d)$ denote the density of a body $C$ in $\mathbb{R}^d$, we clearly have 
+    \[\vartheta(B^d) \leq d(\mathcal{B}^\prime, \mathbb{R}^d) = 2^d d(\mathcal{B}, \mathbb{R}^d) \leq 2^d \delta(B^d)\] 
+    and the result is proven. 
+\end{proof}
+
+In high dimensional Euclidean space, this trivial bound was the best bound known, up to a constant, for a long 
+time! In fact, no construction of saturated lattice packings of balls is known (again, in high dimensional space), worth 
+checking if this has changed since time of writing. This is surprising, given the obvious drawbacks of this argument. 
+If we saturate a packing by continuously adding balls, we can't control the structure of this packing. \\ 
+
+Let $\delta_L(C)$ be the maximal lattice packing density of $C$ into $\mathbb{R}^d$. Using techniques developed by 
+Minkowski and Hlawka, we can prove $\delta_L(B^d) > 2^{-d}$. Namely, we can affirm the existence of a lattice packing 
+strictly outperforming our previously derived lower bound of $2^{-d}$.  
+
+\begin{definition}[]{star-shaped body}
+    Let $C \subset \mathbb{R}^d$ be compact. We call $C$ a {\it star-shaped body} if ${\bf 0}$ is in the interior 
+    of $C$ and has the relation ${\bf x} \in C \Rightarrow \lambda {\bf x} \in C$ for all $\lambda \in [0, 1]$.
+\end{definition}
+
+\begin{definition}[]{admissible latice}
+    Let $\Lambda = \Lambda(u_1, \dots, u_d) = \{m_1 u_1 + \cdots + m_d u_d | m_1, \dots, m_d \in \mathbb{Z}\}$ be a 
+    lattice in $\mathbb{R}^d$ and let $C$ be a star-shaped body. Then $\Lambda$ is said to be {\it admissible} for 
+    $C$ if it contains no interior point of $C\setminus \{{\bf 0}\}$.
+\end{definition}
+
+\begin{definition}[]{critical determinant}
+    Let $C$ be a star-shaped body. The {\it critical determinant} of $C$ is defined by 
+    \[\Delta(C) := \inf \{\det \Lambda | \Lambda \text{ is admissible for } C\}\]
+\end{definition}
+
+\begin{lemma}[]{Mahler selection theorem - 1946}
+    Let $\Lambda_1, \Lambda_2, \dots$ be an infinite sequence of lattices in $\mathbb{R}^d$ that have constants 
+    $\alpha, \beta > 0$ satisfying, for $i \geq 1$, 
+    \begin{enumerate}[(i)]
+        \item $\Lambda_i$ is admissible for $\alpha B^d$
+        \item $\det \Lambda_i \leq \beta$
+    \end{enumerate}
+    Then we can select a convergent subsequence $\Lambda_{i_1}, \Lambda_{i_2}, \dots \to \Lambda$.
+\end{lemma}
+
+\begin{proof}
+    Given as exercise, solve at some point.
+\end{proof}
+
+This lemma allows us to prove that the infimum is obtained (verify this also), giving us the following reformulation
+of Minkowski's fundamental theorem (or as I prefer, Minkowski's pidgeonhole principle).
+
+\begin{theorem}[]{Minkowski's critical determinant lower bound}
+    For any centrally symmetric convex body $C \subset \mathbb{R}^d$, 
+    \[\frac{\Delta(C)}{\text{vol}C} \geq \frac{1}{2^d}\]
+\end{theorem}
+
+Finding an upper bound for the ratio $\Delta(C)/\text{vol}C$ turns out the be much harder. Minkowski was able to 
+give an upper bound, when $C = B^d$, of $\frac{1}{2}(\zeta(d))^{-1}$ where $\zeta(\cdot)$ is the Reimman zeta function.
+We prove, thanks to Hlawka, a generalisation of Minkowski's result. 
+
+\begin{lemma}[]{Davenport $\&$ Rogers}
+    Let $f:\mathbb{R}^d \to \mathbb{R}$ be a continuous map that vanishes outside of some bounded region. For $\gamma
+    \in \mathbb{R}$ set \[V(\gamma) := \int_{\mathbb{R}}\cdots\int_{\mathbb{R}}f(x_1, \dots, x_{d-1}, \gamma)\mathrm{d}x_1 \cdots \mathrm{d}x_{d-1}\] 
+    Fix $\delta > 0$ and let $\Lambda^\prime$ be the integer lattice in the hyperplane $x_d = 0$. For a vector $y \in \mathbb{R}^d$ 
+    of the form $y = (y_1, \dots, y_{d-1}, \delta)$ define $\Lambda_y$ as the lattice generated by $y$ and $\Lambda^\prime$. 
+    Then, \[\int_{0}^1 \cdots \int_{0}^1 \left(\sum_{x \in \Lambda_y, x_d \neq 0}f(x)\right)\mathrm{d}y_1 \cdots \mathrm{d}y_{d-1} 
+    = \sum_{i \in Z\setminus \{0\}}V(i \delta)\]
+\end{lemma}
+
+\begin{proof}
+    Looks like a routine computation but theres one line dependent on voodoo magic, can't wrap my head around it :(
+\end{proof}
+
+Now for our generalisation. We work, as suggested, with the probabilistic method. 
+
+\begin{theorem}[]{Hlawka's theorem}
+    Let $f: \mathbb{R}^d \to \mathbb{R}$ be a bounded Reimann integrable function that vanishes outside of some bounded
+    region and let $\epsilon > 0$. Then there exists a unit lattice $\Lambda$ in $\mathbb{R}^d$ with 
+    \[\sum_{{\bf 0} \neq x \in \Lambda}f(x) < \int_{\mathbb{R}^d}f(x)\mathrm{d}x + \epsilon\]
+\end{theorem} 
+
+\begin{proof}
+
+\end{proof}
+
+\newpage 
+
+\subsection{Appendix C: A new bound for sphere packing in $\mathbb{R}^d$ as $d \to \infty$}
+
+Notes based off of \cite{campos2023}. Campos utilises a Poisson random geometric graph to improve Hayes' 1947 
+bound on the density of the sphere packing problem in high dimensional $\mathbb{R}^d$ by a factor of $\log d$. \\
+
+We denote the maximal density unit-volume sphere packing in $\mathbb{R}^d$ by $\theta(d)$. In this note, we follow 
+the work of Campos et al to prove $\theta(d) \to (1 - o(1))\frac{d\log d}{2^{d+1}}$ as $d \to \infty$. It is worth 
+noting that this is still an exponential factor behind the best upper bound, which currently is $2^{(-0.599\cdots + o(1))d}$.
+An explicit value of $\theta(d)$ is only known for $d \in \{1,2,3,8,24\}$. 
+
+\begin{theorem}[]{$\theta(d)$ bound}
+    As $d \to \infty$, one has \[\theta(d) \geq (1 - o(1))\frac{d\log d}{2^{d+1}}\] 
+\end{theorem}
+
+Of particular importance is the structural irregularity of the packings used to prove this theorem. Previous work 
+relied on lattice packings, whereas this work constructs packings by recursively adding random spheres to $\mathbb{R}^d$
+that are centred on points of an appropriately modified Poisson process. \\
+
+Campos $\&$ Co also managed to adapt their techniques to the problem of spherical codes. I will elect to leave that 
+to their paper (see thm1.2 \cite{campos2023}).
+
+\subsubsection*{Proof of $\theta(d)$ bound}
+
+Here I describe the method. 
+\begin{enumerate}[(i)]
+    \item Discretize space with a Poisson process at a carefully chosen intensity.
+    \item Impose additional uniformity properties on the discrete point set given in (i) and
+    call this space $X \subset \mathbb{R}^d$.
+    \item Consider geometric graph $G = G(X, 2r_d)$, $r_d$ the radius of the $d$-dimensional unit-ball.
+    \item Bound $\alpha(G)$, the largest independent set in $G$. 
+\end{enumerate}
+
+In regards to step (4) we have the following new tool, certainly of independent interest. Let $\Delta(G)$ be the 
+maximum vertex degree and let $\Delta_\text{co}(G)$ denote the maximum codegree (that is, the maximal size of 
+$|\mathcal{N}(u)\cap \mathcal{N}(v)|$ over vertices $u, v \in V$). 
+
+\begin{theorem}[]{$\alpha(G)$ bound}
+    Let $G$ be a graph on $n$ vertices with $\Delta(G) \leq \Delta$ and $\Delta_\text{co}(G) \leq C\Delta (\log \Delta)^{-c}$. 
+    Then, \[\alpha(G) \geq (1 - o(1))\frac{n \log \Delta}{\Delta}\] where $o(1) \to 0$ as $\Delta \to \infty$.
+\end{theorem}
+
+In fact, one can take $C = 2^{-7}$ and $c = 7$. In fact, this bound is sharp up to some constants $c$ and $C$. To see 
+this, $\dots$ [WRITE UP PROOF AT SOME POINT, I GET THE ROUGH IDEA BUT CAN'T FORMALISE].
+
+With this tool, the proof of our $\theta(d)$ bound is remarkably easy. To do so, we just need the following lemma. 
+
+\begin{lemma}[]{large uniform geometric graphs}
+    Let $\Omega \subset \mathbb{R}^d$ be bounded and measurable. Then $\forall d \geq 1000 \; \exists X \subset \Omega$ 
+    with \[|X| \geq (1-1/d)\frac{\Delta}{2^d}\text{Vol}(\Omega), \quad \text{where} \quad \Delta = 
+    \left(\frac{\sqrt{d}}{4\log d}\right)^d\] and, setting $G = G(X, r_d)$ we have 
+    \[\Delta(G) \leq \Delta(1 + \Delta^{-1/3}) \quad \text{and} \quad \Delta_\text{co} \leq \Delta e^{-(\log d)^2/8}\]
+\end{lemma}
+
+\begin{proof}[Proof of $\theta(d)$ bound]
+    Fix $R > 0$ and set $\Omega = B_{{\bf 0}}(R)$. It suffices to prove that we can place \[(1 - o(1))\text{Vol}(\Omega)
+    \frac{d\log d}{2^{d+1}}\] points each at pairwise distance bounded below (weakly) by $2r^d$. The previous lemma 
+    gives us $X \subset \Omega$ with \[|X| \geq (1-o(1))\text{Vol}(\Omega)\Delta 2^{-d}\] with $G(X, 2r_d)$ satisfying 
+    the conditions of our $\alpha(G)$ bound. Applying this gives an independent set $I$ with \[|I| \geq (1-o(1))
+    \frac{|X|\log \Delta}{\Delta} \geq (1-o(1))\text{Vol}(\Omega)\frac{d\log d}{2^{d+1}}\] and we're done.
+\end{proof}
+
+Proving the the lemma will take some more work. I'll come back to it soon. Interestingly enough I see it uses the 
+Mecke equation quite a few times, a lemma seen in Penrose's work. 
 
 \newpage
 
