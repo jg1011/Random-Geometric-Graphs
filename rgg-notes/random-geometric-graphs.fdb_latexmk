@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex random-geometric-graphs"] 1729266591.43999 "random-geometric-graphs.aux" "random-geometric-graphs.bbl" "random-geometric-graphs" 1729267930.45292 0
+["bibtex random-geometric-graphs"] 0 "random-geometric-graphs.aux" "random-geometric-graphs.bbl" "random-geometric-graphs" 1729358362.57846 -1
   "./refs.bib" 1729259416 1371 5db3cbde45465749121e9e7b44e5ca4a ""
   "C:/Users/jacob/AppData/Local/Programs/MiKTeX/bibtex/bst/bibtex/plain.bst" 1291864736 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "random-geometric-graphs.aux" 1729267929 1461 3a664837708a954eee28a5cb2170686c "pdflatex"
+  "random-geometric-graphs.aux" 1729358361 1571 88a214148f00f7cf14b06761d5bbac51 "pdflatex"
   (generated)
   "random-geometric-graphs.bbl"
   "random-geometric-graphs.blg"
   (rewritten before read)
-["pdflatex"] 1729267928.71736 "c:/Users/jacob/notes/uob/thesis/rgg-notes/random-geometric-graphs.tex" "random-geometric-graphs.pdf" "random-geometric-graphs" 1729267930.45355 0
+["pdflatex"] 1729358359.78399 "c:/Users/jacob/notes/uob/thesis/rgg-notes/random-geometric-graphs.tex" "random-geometric-graphs.pdf" "random-geometric-graphs" 1729358362.57899 0
   "C:/Users/jacob/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1728386373 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/jacob/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1727881927 11948197 20c6e57245285ee498160c9c98e56c13 ""
   "C:/Users/jacob/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1233951848 1004 54797486969f23fa377b128694d548df ""
@@ -197,11 +197,11 @@
   "C:/Users/jacob/AppData/Local/Programs/MiKTeX/tex/latex/tools/verbatim.sty" 1718356376 7532 d2e1111e17bfebb1607d8ffa779705ec ""
   "C:/Users/jacob/AppData/Local/Programs/MiKTeX/tex/latex/trimspaces/trimspaces.sty" 1253169183 1380 971a51b00a14503ddf754cab24c3f209 ""
   "C:/Users/jacob/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1700127522 55487 80a65caedd3722f4c20a14a69e785d8f ""
-  "c:/Users/jacob/notes/uob/thesis/rgg-notes/random-geometric-graphs.tex" 1729267928 32159 b6eedd4e179e38c492cdf25df812dab4 ""
-  "random-geometric-graphs.aux" 1729267929 1461 3a664837708a954eee28a5cb2170686c "pdflatex"
-  "random-geometric-graphs.bbl" 1729266591 828 c02b22fa51ccc7c578e8633e24a78d73 "bibtex random-geometric-graphs"
-  "random-geometric-graphs.tex" 1729267928 32159 b6eedd4e179e38c492cdf25df812dab4 ""
-  "random-geometric-graphs.toc" 1729267929 736 bcf9b36ac25f8e4b03b027f78ce1a4df "pdflatex"
+  "c:/Users/jacob/notes/uob/thesis/rgg-notes/random-geometric-graphs.tex" 1729358358 34916 c74229a49cec2b0be4bce97550c7f386 ""
+  "random-geometric-graphs.aux" 1729358361 1571 88a214148f00f7cf14b06761d5bbac51 "pdflatex"
+  "random-geometric-graphs.bbl" 1729354425 828 c02b22fa51ccc7c578e8633e24a78d73 "bibtex random-geometric-graphs"
+  "random-geometric-graphs.tex" 1729358358 34916 c74229a49cec2b0be4bce97550c7f386 ""
+  "random-geometric-graphs.toc" 1729358361 736 bcf9b36ac25f8e4b03b027f78ce1a4df "pdflatex"
   (generated)
   "random-geometric-graphs.aux"
   "random-geometric-graphs.log"

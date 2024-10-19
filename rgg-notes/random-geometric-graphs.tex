@@ -562,7 +562,7 @@ the work of Campos et al to prove $\theta(d) \to (1 - o(1))\frac{d\log d}{2^{d+1
 noting that this is still an exponential factor behind the best upper bound, which currently is $2^{(-0.599\cdots + o(1))d}$.
 An explicit value of $\theta(d)$ is only known for $d \in \{1,2,3,8,24\}$. 
 
-\begin{theorem}[]{$\theta(d)$ bound}
+\begin{theorem}[]{$\theta(d)$ bound / theorem 1.1 in \cite{campos2023}}
     As $d \to \infty$, one has \[\theta(d) \geq (1 - o(1))\frac{d\log d}{2^{d+1}}\] 
 \end{theorem}
 
@@ -578,9 +578,8 @@ to their paper (see thm1.2 \cite{campos2023}).
 Here I describe the method. 
 \begin{enumerate}[(i)]
     \item Discretize space with a Poisson process at a carefully chosen intensity.
-    \item Impose additional uniformity properties on the discrete point set given in (i) and
-    call this space $X \subset \mathbb{R}^d$.
-    \item Consider geometric graph $G = G(X, 2r_d)$, $r_d$ the radius of the $d$-dimensional unit-ball.
+    \item Impose additional uniformity properties on the discrete point set given in (i), giving $X \subset \mathbb{R}^d$.
+    \item Consider geometric graph $G = G(X, 2r_d)$, $r_d$ the radius of the $d$-dimensional unit-volume ball.
     \item Bound $\alpha(G)$, the largest independent set in $G$. 
 \end{enumerate}
 
@@ -588,33 +587,74 @@ In regards to step (4) we have the following new tool, certainly of independent 
 maximum vertex degree and let $\Delta_\text{co}(G)$ denote the maximum codegree (that is, the maximal size of 
 $|\mathcal{N}(u)\cap \mathcal{N}(v)|$ over vertices $u, v \in V$). 
 
-\begin{theorem}[]{$\alpha(G)$ bound}
+\begin{theorem}[]{$\alpha(G)$ bound / theorem 1.3 in \cite{campos2023}}
     Let $G$ be a graph on $n$ vertices with $\Delta(G) \leq \Delta$ and $\Delta_\text{co}(G) \leq C\Delta (\log \Delta)^{-c}$. 
     Then, \[\alpha(G) \geq (1 - o(1))\frac{n \log \Delta}{\Delta}\] where $o(1) \to 0$ as $\Delta \to \infty$.
 \end{theorem}
 
 In fact, one can take $C = 2^{-7}$ and $c = 7$. In fact, this bound is sharp up to some constants $c$ and $C$. To see 
-this, $\dots$ [WRITE UP PROOF AT SOME POINT, I GET THE ROUGH IDEA BUT CAN'T FORMALISE].
+this, $\dots$ [Not sure I fully get this]. \\
 
-With this tool, the proof of our $\theta(d)$ bound is remarkably easy. To do so, we just need the following lemma. 
+With this tool, the proof of our $\theta(d)$ bound is remarkably easy. We just need the following lemma. 
 
-\begin{lemma}[]{large uniform geometric graphs}
+\begin{lemma}[]{large uniform geometric graphs / lemma 2.1 in \cite{campos2023}}
     Let $\Omega \subset \mathbb{R}^d$ be bounded and measurable. Then $\forall d \geq 1000 \; \exists X \subset \Omega$ 
     with \[|X| \geq (1-1/d)\frac{\Delta}{2^d}\text{Vol}(\Omega), \quad \text{where} \quad \Delta = 
     \left(\frac{\sqrt{d}}{4\log d}\right)^d\] and, setting $G = G(X, r_d)$ we have 
     \[\Delta(G) \leq \Delta(1 + \Delta^{-1/3}) \quad \text{and} \quad \Delta_\text{co} \leq \Delta e^{-(\log d)^2/8}\]
 \end{lemma}
 
-\begin{proof}[Proof of $\theta(d)$ bound]
+\begin{proof}[Proof of $\theta(d)$ bound / Theorem 1.1 in \cite{campos2023}]
     Fix $R > 0$ and set $\Omega = B_{{\bf 0}}(R)$. It suffices to prove that we can place \[(1 - o(1))\text{Vol}(\Omega)
-    \frac{d\log d}{2^{d+1}}\] points each at pairwise distance bounded below (weakly) by $2r^d$. The previous lemma 
+    \frac{d\log d}{2^{d+1}}\] points each at pairwise distance less than $2r^d$. The previous lemma 
     gives us $X \subset \Omega$ with \[|X| \geq (1-o(1))\text{Vol}(\Omega)\Delta 2^{-d}\] with $G(X, 2r_d)$ satisfying 
     the conditions of our $\alpha(G)$ bound. Applying this gives an independent set $I$ with \[|I| \geq (1-o(1))
     \frac{|X|\log \Delta}{\Delta} \geq (1-o(1))\text{Vol}(\Omega)\frac{d\log d}{2^{d+1}}\] and we're done.
 \end{proof}
 
-Proving the the lemma will take some more work. I'll come back to it soon. Interestingly enough I see it uses the 
-Mecke equation quite a few times, a lemma seen in Penrose's work. 
+To prove lemma 2.1 we'll consider a Poisson point process with intensity $\lambda=2^{-d}\Delta=
+\left(\frac{\sqrt{d}}{8\log d}\right)^d$ and remove "bad" points $x \in X$ with 
+\[|X \cap B_x(2r_d)| \geq \Delta(1+\Delta^{-1/3}) \quad \text{or} \quad |X \cap B_x(2_r) \cap B_y(2r_d)| \geq 
+\Delta e^{-(\log d)^2/8}\] for some $y \in X$. These bad points are of course those that have too high a degree 
+or codegree to let us be in the conditions of our $\alpha(G)$ bound for $G = G(X, 2r_d)$. To prove we don't delete 
+too many points, we will make repeated use of the previously seen Mecke equation, stated in the following form. 
+
+\begin{lemma}[]{univariate Mecke}
+    Let $\Omega \subset \mathbb{R}^d$ be bounded and measurable, and let $X \sim \text{Po}_\lambda(\Omega)$ be a
+    Poisson point process rate $\lambda$ on $\Omega$. Then, for events $(A_x)_{x \in \Omega}$ 
+    \[\mathbb{E}[|x \in X \cap \Omega :  A_x \text{ holds on } X|] = \lambda\int_\Omega \mathbb{P}(A_x \text{ holds on } X \cup \{x\})dx\]
+\end{lemma}
+
+\begin{proof}
+    Just a special case of lemma 1.11.
+\end{proof}
+
+We will also make use of the following elementary tail bound for Poisson random variables
+
+\begin{lemma}[]{Poisson tail bound}
+    Let $Y \sim \text{Po}(\lambda)$ be a Poisson random variable with rate $\lambda$. Then, for all $t > 0$,
+    \[\mathbb{P}(Y - \lambda \geq \lambda t) \leq \exp(-\lambda\min\{t, t^2\}/3)\]
+\end{lemma}
+
+Smells like a Chernoff type bound, some napkin mathematics (using chernoff and $1+x \leq e^x$) gives me a candidate 
+RHS of $e^{-\lambda t^2}$. I can't, off the top, of my head beat this though. \\ 
+
+Firstly, we'll prove the number of ``bad'' points, in the sense of having too a high a degree, is small. 
+
+\begin{lemma}[]{number of high degree points is small / lemma 2.2 in \cite{campos2023}}
+    Let $\Omega \subset \mathbb{R}^d, d \geq 4$ be a bounded $\&$ measurable subset and $X \sim \text{Po}_{\lambda}(\Omega)$ 
+    a Poisson point process on $\Omega$ with intensity $\lambda$. Then, 
+    \[\mathbb{E}[|\{x \in X : |X \cap B_x(2r_d)| \geq \Delta(1+\Delta^{-1/3})\}|] \leq \frac{1}{2d}\mathbb{E}[|X|]\] 
+\end{lemma}
+
+\begin{proof}
+    Fix $s > 0$. Then Mecke's equation gives us 
+    \[\mathbb{E}[|\{x \in X : |X \cap B_x(2r_d)| \geq s\}|] = \lambda \int_{\Omega} \mathbb{P}[|X \cap B_x(2r_d)| \geq s-1] \tag{$\dagger$}\]
+    Now, for fixed $x \in \Omega$, $|X \cap B_x(2r_d)|$ is a Poisson random variable of rate at most $\lambda 2^d =: 
+    \Delta$, which follows from noting $\text{Vol}(B_x(2r_d) \cap X) \leq 2^d$. Hence, via our Poisson tail bounds, one has 
+    \[\mathbb{P}[|X \cap B_x(2r_d)| \geq \Delta(t+1)] \leq \exp\left(-\min\{t, t^2\}\Delta/3\right) \quad \text{for } t > 0\] 
+    Taking $t = \Delta^{-1/3} - \Delta^{-1}$ and substuting this into $(\dagger)$ gives us the result.
+\end{proof}
 
 \newpage
 
