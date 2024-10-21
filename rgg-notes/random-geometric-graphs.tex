@@ -9,6 +9,7 @@
 \usepackage{lipsum}
 \usepackage{mathtools}
 \usepackage{amsthm} % For proof environments only, labelling of thms done with custom counter
+\usepackage{amssymb}
 
 %%% Misc commands %%%
 \newcommand\iidsim{\stackrel{\mathclap{\tiny\mbox{i.i.d}}}{\sim}}
@@ -25,7 +26,7 @@
 \newcommand{\subtitle}{A collection of notes from my time working under the supervision of Mathew Penrose on 
 random geometric graph theory and related topics.}
 \newcommand{\institution}{Department of Mathematical Sciences, The University of Bath}
-\newcommand{\keywords}{Random geometric graphs, Poisson Point Processes}
+\newcommand{\keywords}{Random geometric graphs, Poisson Point Processes, Combinatorial Geometry, Sphere Packing}
 
 \newcounter{globaltcb} % tcolorbox counter, for ease of self-reference
 \newcounter{claimcount} % Used for proof with lots of claims
@@ -86,6 +87,16 @@ random geometric graph theory and related topics.}
   fonttitle=\bfseries, 
   coltitle=black, 
   title=Corollary \arabic{section}.\arabic{globaltcb} (#2), 
+  before upper={\refstepcounter{globaltcb}},
+  #1, % Optional params
+}
+
+\newtcolorbox{remark}[2][use counter=globaltcb, number within=section]{
+  colback=black!5!white,
+  colframe=black!50!white, 
+  fonttitle=\bfseries, 
+  coltitle=black, 
+  title=Remark \arabic{section}.\arabic{globaltcb} (#2), 
   before upper={\refstepcounter{globaltcb}},
   #1, % Optional params
 }
@@ -615,7 +626,7 @@ With this tool, the proof of our $\theta(d)$ bound is remarkably easy. We just n
 To prove lemma 2.1 we'll consider a Poisson point process with intensity $\lambda=2^{-d}\Delta=
 \left(\frac{\sqrt{d}}{8\log d}\right)^d$ and remove "bad" points $x \in X$ with 
 \[|X \cap B_x(2r_d)| \geq \Delta(1+\Delta^{-1/3}) \quad \text{or} \quad |X \cap B_x(2_r) \cap B_y(2r_d)| \geq 
-\Delta e^{-(\log d)^2/8}\] for some $y \in X$. These bad points are of course those that have too high a degree 
+\Delta e^{-(\log d)^2/8} \tag{$\heartsuit$}\] for some $y \in X$. These bad points are of course those that have too high a degree 
 or codegree to let us be in the conditions of our $\alpha(G)$ bound for $G = G(X, 2r_d)$. To prove we don't delete 
 too many points, we will make repeated use of the previously seen Mecke equation, stated in the following form. 
 
@@ -636,26 +647,164 @@ We will also make use of the following elementary tail bound for Poisson random 
     \[\mathbb{P}(Y - \lambda \geq \lambda t) \leq \exp(-\lambda\min\{t, t^2\}/3)\]
 \end{lemma}
 
-Smells like a Chernoff type bound, some napkin mathematics (using chernoff and $1+x \leq e^x$) gives me a candidate 
-RHS of $e^{-\lambda t^2}$. I can't, off the top, of my head beat this though. \\ 
+\begin{proof}
+    Smells like a Chernoff type bound, some napkin mathematics (using chernoff and $1+x \leq e^x$) gives me a candidate 
+    RHS of $e^{-\lambda t^2}$. I can't, off the top, of my head beat this though.
+\end{proof}
 
-Firstly, we'll prove the number of ``bad'' points, in the sense of having too a high a degree, is small. 
+Firstly, we'll prove the number of points with too high a degree is small.
 
 \begin{lemma}[]{number of high degree points is small / lemma 2.2 in \cite{campos2023}}
-    Let $\Omega \subset \mathbb{R}^d, d \geq 4$ be a bounded $\&$ measurable subset and $X \sim \text{Po}_{\lambda}(\Omega)$ 
-    a Poisson point process on $\Omega$ with intensity $\lambda$. Then, 
-    \[\mathbb{E}[|\{x \in X : |X \cap B_x(2r_d)| \geq \Delta(1+\Delta^{-1/3})\}|] \leq \frac{1}{2d}\mathbb{E}[|X|]\] 
+    Let $\Omega \subset \mathbb{R}^d, d \geq 4$ be a bounded $\&$ measurable subset and 
+    $\mathcal{X} \sim \text{Po}_{\lambda}(\Omega)$. Then, 
+    \[\mathbb{E}[|\{x \in X : |X \cap B_x(2r_d)| \geq \Delta(1+\Delta^{-1/3})\}|] \leq \frac{1}{2d}\mathbb{E}[|X|], 
+    \quad \text{with } \lambda = 2^{-d}\Delta = \left(\frac{\sqrt{d}}{8 \log d}\right)^d\] 
 \end{lemma}
 
 \begin{proof}
     Fix $s > 0$. Then Mecke's equation gives us 
-    \[\mathbb{E}[|\{x \in X : |X \cap B_x(2r_d)| \geq s\}|] = \lambda \int_{\Omega} \mathbb{P}[|X \cap B_x(2r_d)| \geq s-1] \tag{$\dagger$}\]
-    Now, for fixed $x \in \Omega$, $|X \cap B_x(2r_d)|$ is a Poisson random variable of rate at most $\lambda 2^d =: 
-    \Delta$, which follows from noting $\text{Vol}(B_x(2r_d) \cap X) \leq 2^d$. Hence, via our Poisson tail bounds, one has 
-    \[\mathbb{P}[|X \cap B_x(2r_d)| \geq \Delta(t+1)] \leq \exp\left(-\min\{t, t^2\}\Delta/3\right) \quad \text{for } t > 0\] 
+    \[\mathbb{E}[|\{x \in \mathcal{X} : |\mathcal{X} \cap B_x(2r_d)| \geq s\}|] 
+    = \lambda \int_{\Omega} \mathbb{P}[|\mathcal{X} \cap B_x(2r_d)| \geq s-1] \tag{$\dagger$}\]
+    Now, for fixed $x \in \Omega$, $|\mathcal{X} \cap B_x(2r_d)|$ is a Poisson random variable of rate at most 
+    $\lambda 2^d =: \Delta$, which follows from noting $\text{Vol}(B_x(2r_d) \cap X) \leq 2^d$. Hence, via our 
+    Poisson tail bounds, one has 
+    \[\mathbb{P}[|\mathcal{X} \cap B_x(2r_d)| \geq \Delta(t+1)] 
+    \leq \exp\left(-\min\{t, t^2\}\Delta/3\right) \quad \text{for } t > 0\] 
     Taking $t = \Delta^{-1/3} - \Delta^{-1}$ and substuting this into $(\dagger)$ gives us the result.
 \end{proof}
 
+Now we do the same with the codegree, which will take more work. 
+
+\begin{lemma}[]{number of high codegree points is small}
+    Let $\Omega \subset \mathbb{R}^d$ be bounded and measurable, $\mathcal{X} \sim \text{Po}_\lambda(\Omega)$ and set 
+    $\eta = e^{-(\log d)^2/8}$. Then, \[\mathbb{E}\left[\left|\{x \in \mathcal{X} : \exists y \in \mathcal{X} \text{ with }
+    |\mathcal{X} \cap B_x(2r_d) \cap B_y(2r_d)| \geq \eta \Delta\}\right|\right] \leq \frac{1}{2d}\mathbb{E}[|\mathcal{X}|]\]
+\end{lemma}
+
+\begin{proof}
+    Set $I_{x,y} = |\mathcal{X} \cap B_x(2r_d) \cap B_y(2r_d)|$. Then applying Meckes, obtain 
+    \[\text{LHS} = \mathbb{E}\left|\{x \in \mathcal{X} : \exists y \in \mathcal{X} \text{ with } I_{x,y}
+    \geq \eta \Delta\}\right| = \lambda \int_{\Omega}\mathbb{P}(\exists y \in \mathcal{X} : I_{x,y} \geq 
+    \eta \Delta -1)\mathrm{d}x\] 
+    Thus it suffices to prove that $\mathbb{P}(\exists y \in \mathcal{X} : I_{x,y} \geq \eta \Delta - 1) \leq \frac{1}{2d}$.
+    \begin{claim}[]{(1)}
+        \[\mathbb{P}(\exists y \in \mathcal{X} : I_{x,y} \geq \eta \Delta -1) \leq \mathbb{E}|B_x(\log d) \cap \mathcal{X}|
+        + \mathbb{E}|\{y \in \mathcal{X} \setminus B_x(\log d) : I_{x,y} \geq \eta \Delta - 1\}|\]
+    \end{claim}
+
+    \begin{proof}[Proof of claim (1)]
+        Observe, by applying Markov's inequality twice,
+        \begin{align*}
+            &\mathbb{P}(\exists y \in \mathcal{X} : I_{x,y} \geq \eta \Delta - 1) \\
+             &= \mathbb{P}(\exists y \in \mathcal{X} \cap B_x(\log d) : I_{x,y} \geq \eta \Delta - 1)
+            + \mathbb{P}(\exists y \in \mathcal{X} \setminus B_x(\log d) : I_{x,y} \geq \eta \Delta - 1) \\
+            &= \mathbb{P}(|\{y \in \mathcal{X} \cap B_x(\log d) : I_{x,y} \geq \eta \Delta - 1\}| \geq 1) + 
+            \mathbb{P}(|\{y \in \mathcal{X} \setminus B_x(\log d) : I_{x,y} \geq \eta \Delta - 1\}| \geq 1) \\
+            &\leq \mathbb{E}|\{y \in \mathcal{X} \cap B_x(\log d) : I_{x,y} \geq \eta \Delta - 1\}| + 
+            \mathbb{E}|\{y \in \mathcal{X} \setminus B_x(\log d) : I_{x,y} \geq \eta \Delta - 1\}| 
+            \tag{\text{Markov}} \\
+            &\leq \mathbb{E}|\mathcal{X} \cap B_x(\log d)| + \mathbb{E}|\{y \in \mathcal{X} \setminus B_x(2r_d) : I_{x,y} \geq \eta \Delta - 1\}| 
+        \end{align*}
+        and we're done :)
+    \end{proof}
+    Now we'll bound the two terms in our summation. For the leftmost term, simply observe 
+    \[\mathbb{E}|\mathcal{X} \cap B_x(\log d)| = \lambda \text{Vol}(B_x(\log d)) 
+    = \left(\frac{\sqrt{d}}{8\log d}\right)^d \cdot \left(\frac{\pi^{d/2}}{\Gamma(\frac{d}{2} + 1)}(\log d)^d\right)
+    = \frac{\left(\frac{d\pi}{64}\right)^{d/2}}{\Gamma(\frac{d}{2} + 1)}\]
+    Which with $\Gamma(d/2 + 1) \geq 2^{-d/2}e^{-d/2}d^{d/2}$ (Stirling's approximation) gives 
+    \[\frac{\left(\frac{d\pi}{64}\right)^{d/2}}{\Gamma(\frac{d}{2} + 1)} \leq \left(\frac{2\pi e}{32}\right)^{d/2}\]
+    Now Campos $\&$ Co jump from this to a bound above of $\frac{1}{4d}$. I make some comments about this below. \\
+
+    For the rightmost term we'll need the following result. 
+    \begin{claim}[]{(2)}
+        For $t \geq 0$, take $x, y \in \mathbb{R}^d$ with $\lvert x - y \rvert \geq t$. Then,
+        \[\text{Vol}(B_x(2r_d)\cap B_y(2r_d)) \leq 2^d e^{-t^2/4}\]
+    \end{claim}
+    \begin{proof}[Proof of claim 2]
+        Easy calculations, just take a (carefully chosen) covering ball. See \cite{campos2023} fact 2.3.
+    \end{proof}
+    Now, using Mecke, observe (as $I_{x,y} = 0$ on $y \notin B_{x}(4r_d)$) setting $\Omega^\prime 
+    := B_x(4r_d) \setminus B_x(\log d)$
+    \begin{align*}
+        \mathbb{E}&|\{y \in X \setminus B_x(\log d) : I_{x,y} \geq \eta \Delta - 1\}| 
+        = \lambda \int_{\Omega^\prime}\mathbb{P}(X_{x,y} \geq \eta \Delta - 2)\mathrm{d}y \\
+        &\leq \lambda \text{Vol}(\Omega^\prime) \; \times \;\max_{y \in \Omega^\prime}\mathbb{P}(X_{x,y} \geq \eta \Delta - 2) \\
+        &\leq \lambda \text{Vol}(B_x(4r_d)) \; \times \; \max_{y \in \Omega^\prime}\mathbb{P}(X_{x,y} \geq \eta \Delta - 2) \\
+        &= \mathbb{E}[X \cap B_x(4r_d)] \; \times \; \max_{y \in \Omega^\prime}\mathbb{P}(X_{x,y} \geq \eta \Delta - 2)
+    \end{align*}
+    Now some annoying abounding gives the same $\frac{1}{4d}$ upper bound. Gonna eat lunch then type this up.
+\end{proof}
+
+\begin{remark}[]{on claim 1}
+    Could we get something tighter by initially summing over $y \in \mathcal{X}$ (disjoint probabilities) and 
+    then bounding the terms in the summand? Also the choice of our split set to be $B_x(\log d)$ is purely to 
+    cancel with the chosen $\log(d)$ factor in our intensity $\lambda$. Worth noting. 
+\end{remark}
+
+\begin{remark}[]{on the bounding of $\mathbb{E}|\mathcal{X} \cap B_x(\log d)|$}
+    That final leap seems super lazy? We go from an exponential rate of decrease to linear. Surely this can be 
+    improved to achieve something non-trivial? Maybe not, worth investigating regardless. In the paper they get 
+    $8$ as their final denominator, I get $32$? Did I improve this or make a mistake? Check it out! 
+\end{remark}
+
+Now we may finally prove our original lemma, lemma 2.26 / lemma 2.1 in \cite{campos2023}. 
+
+\begin{proof}[Proof of lemma 2.26]
+    Set $S_1$ be the collection of points with high degree and $S_2$ those with high codegree (i.e. the left/right 
+    conditions in $(\heartsuit)$) and $X = \mathcal{X} \setminus (S_1 \cup S_2)$ the space without these ``bad'' points.
+    Then,
+    \[\mathbb{E}|X| \geq \mathbb{E}|\mathcal{X}| - \mathbb{E}|S_1| - \mathbb{E}|S_2| 
+    \geq \left(1 - \frac{1}{d}\right)\mathbb{E}|\mathcal{X}| = \left(1 - \frac{1}{d}\right)\text{Vol}(\Omega)\Delta 2^{-d}\]
+    using our lemmas for the expected size of $S_1$ and $S_2$, so we have our $X \subset \Omega$ (by $\mathbb{P}(X \geq \mathbb{E}X) > 0$).
+\end{proof}
+
+\begin{remark}[]{on the $d \geq 1000$ assumption}
+    Where was $d \geq 1000$ used? I can only spot a $d \geq 4$ in the use of Stirling's. Worth checking.
+\end{remark}
+
+\subsubsection*{Controlling degrees and Codegrees}
+
+We now introduce the {\it R\"{o}dl nibble}, which will be the key to our proof of thm 1.3. 
+
+Throughout this (sub)section, we make the following assumptions. 
+\[d_G(v) \in \{\Delta -1, \Delta\}, \; \Delta_{\text{co}}(G) \leq \eta \Delta, \; \Delta \geq 1, \; 
+\gamma \leq \frac{1}{2}, \; \eta \in [\Delta^{-1/2}, \gamma^2/8]\]
+
+We spend this section showing that after each ``nibble'', the degrees and codegrees decrease appropriately. This 
+result is summarised with the following proposition. 
+
+\begin{proposition}[]{nibbles dont kill degrees / lemma 3.1 in \cite{campos2023}}
+    Let $\Delta, \gamma, \eta$ be as above, let $\alpha \in [2\gamma^2, \gamma]$ and let $G$ be as above. Let 
+    $A \subseteq V(G)$ be a $(\gamma/\delta)$-random set, and let $G^\prime = G \setminus (A \cup \mathcal{N}_G(A))$.
+    Then, $\forall u \neq v \in G$ 
+    \begin{align*}
+        \mathbb{P}(d_{G^\prime}(v) \geq (1 - \delta + \alpha)d_G(v) | v \in V(G^\prime)) \leq \text{exp}\left(\frac{-\alpha^2}{32\gamma\eta}\right) \\
+        \mathbb{P}(d_{G^\prime}(u,v) \geq (1 - \delta + \alpha)\eta\Delta | v \in V(G^\prime)) \leq \text{exp}\left(\frac{-\alpha^2}{32\gamma\eta}\right)
+    \end{align*}
+\end{proposition}
+
+Before we're able to prove this we'll need some preliminary results concerning our nibble. First, we'll calculate the 
+mean degree/codegree after each nibble. 
+
+\begin{lemma}[]{mean degree/codegree post-nibble / lemma 3.2 in \cite{campos2023}}
+    Let $\Delta, \gamma, \eta$, $G$ be as defined at the start of the (sub)section, let $A$ and $G^\prime$ be as in 
+    prior proposition (lemma 3.1 in \cite{campos2023}). Then, for $u, v \in V(G)$, 
+    \[\mathbb{E}[d_{G^\prime}(v) | v \in V(G^\prime)] \leq (1 - \gamma + \gamma^2)d_G(v) \quad \text{and} \quad
+    \mathbb{E}[d_{G^\prime}(u, v) | u, v \in V(G^\prime)] \leq (1 - \gamma + \gamma^2)d_G(u, v)\]
+\end{lemma}
+
+We just prove the mean degree result, noting the proof for the codegree is almost identical.
+
+\begin{proof}
+     Conditioned on the fact $v \in V(G^\prime)$, we know that $A$ is a $(\gamma/\Delta)$-random subset of 
+     $V(G) \setminus (\mathcal{N}_G(v) \cup \{v\})$ (as all the $\mathcal{N}_G(v) \cup \{v\}$ must survive). 
+     Let $w \in \mathcal{N}_G(v)$ and $d_w = |\mathcal{N}_G(w) \setminus (\mathcal{N}_G(v) \cup \{v\})|$. 
+     Then, \[d_w = |\mathcal{N}_G(w)| - |\mathcal{N}_G(v) \cap \mathcal{N}_G(w)| - |\{v\}| 
+     = d_G(w) - d_G(w, v) - 1\]
+     (where the $-1$ comes from $w \in \mathcal{N}_G(v)$), so by our setup we may bound 
+     \[d_w \geq (\Delta - 1) - \eta\Delta - 1 \geq \ (1 - \gamma^2/8)\Delta - 2\]
+     [SLIGHTLY OFF ON LAST BOUND THERE, CHECK PAPER AND SEE HOW TO GO FROM A -> B].
+\end{proof}
 \newpage
 
 %%% References

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.10.2)  19 OCT 2024 18:19
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.10.2)  21 OCT 2024 20:19
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -519,20 +519,20 @@ Package: amsthm 2020/05/29 v2.20.6
  (random-geometric-graphs.aux)
 \openout1 = `random-geometric-graphs.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
  (C:\Users\jacob\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count332
@@ -612,28 +612,28 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 [1]
 
-LaTeX Font Warning: Command \tiny invalid in math mode on input line 171.
+LaTeX Font Warning: Command \tiny invalid in math mode on input line 182.
 
 
-LaTeX Font Warning: Command \tiny invalid in math mode on input line 171.
+LaTeX Font Warning: Command \tiny invalid in math mode on input line 182.
 
 
-LaTeX Font Warning: Command \tiny invalid in math mode on input line 171.
+LaTeX Font Warning: Command \tiny invalid in math mode on input line 182.
 
 
-LaTeX Font Warning: Command \tiny invalid in math mode on input line 171.
+LaTeX Font Warning: Command \tiny invalid in math mode on input line 182.
 
 
-LaTeX Font Warning: Command \tiny invalid in math mode on input line 179.
+LaTeX Font Warning: Command \tiny invalid in math mode on input line 190.
 
 
-LaTeX Font Warning: Command \tiny invalid in math mode on input line 179.
+LaTeX Font Warning: Command \tiny invalid in math mode on input line 190.
 
 
-LaTeX Font Warning: Command \tiny invalid in math mode on input line 179.
+LaTeX Font Warning: Command \tiny invalid in math mode on input line 190.
 
 
-LaTeX Font Warning: Command \tiny invalid in math mode on input line 179.
+LaTeX Font Warning: Command \tiny invalid in math mode on input line 190.
 
 
 
@@ -641,33 +641,33 @@ LaTeX Font Warning: Command \tiny invalid in math mode on input line 179.
 
 [2]
 
-LaTeX Font Warning: Command \tiny invalid in math mode on input line 340.
+LaTeX Font Warning: Command \tiny invalid in math mode on input line 351.
 
 
-LaTeX Font Warning: Command \tiny invalid in math mode on input line 340.
+LaTeX Font Warning: Command \tiny invalid in math mode on input line 351.
 
 
-LaTeX Font Warning: Command \tiny invalid in math mode on input line 340.
+LaTeX Font Warning: Command \tiny invalid in math mode on input line 351.
 
 
-LaTeX Font Warning: Command \tiny invalid in math mode on input line 340.
+LaTeX Font Warning: Command \tiny invalid in math mode on input line 351.
 
 
-LaTeX Font Warning: Command \tiny invalid in math mode on input line 345.
+LaTeX Font Warning: Command \tiny invalid in math mode on input line 356.
 
 
-LaTeX Font Warning: Command \tiny invalid in math mode on input line 345.
+LaTeX Font Warning: Command \tiny invalid in math mode on input line 356.
 
 
-LaTeX Font Warning: Command \tiny invalid in math mode on input line 345.
+LaTeX Font Warning: Command \tiny invalid in math mode on input line 356.
 
 
-LaTeX Font Warning: Command \tiny invalid in math mode on input line 345.
+LaTeX Font Warning: Command \tiny invalid in math mode on input line 356.
 
 
 
 [3]
-Overfull \hbox (3.08852pt too wide) detected at line 372
+Overfull \hbox (3.08852pt too wide) detected at line 383
 []
  []
 
@@ -678,17 +678,17 @@ Overfull \hbox (3.08852pt too wide) detected at line 372
 [5]
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 445--447
+Underfull \hbox (badness 10000) in paragraph at lines 456--458
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 448--451
+Underfull \hbox (badness 10000) in paragraph at lines 459--462
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 477--481
+Underfull \hbox (badness 10000) in paragraph at lines 488--492
 
  []
 
@@ -697,51 +697,55 @@ Underfull \hbox (badness 10000) in paragraph at lines 477--481
 [7]
 
 [8]
-Underfull \hbox (badness 10000) in paragraph at lines 557--559
+Underfull \hbox (badness 10000) in paragraph at lines 568--570
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 569--572
+Underfull \hbox (badness 10000) in paragraph at lines 580--583
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 595--597
+Underfull \hbox (badness 10000) in paragraph at lines 606--608
 
  []
 
 
 
 [9]
-Underfull \hbox (badness 10000) in paragraph at lines 639--641
+
+[10]
+Underfull \hbox (badness 10000) in paragraph at lines 715--717
 
  []
 
 
 
-[10]
+[11]
 
-[11] (random-geometric-graphs.bbl)
+[12]
 
-[12] (random-geometric-graphs.aux)
+[13] (random-geometric-graphs.bbl)
+
+[14] (random-geometric-graphs.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-08-30>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 22245 strings out of 473899
- 482801 string characters out of 5726500
- 983079 words of memory out of 5000000
- 44723 multiletter control sequences out of 15000+600000
+ 22260 strings out of 473899
+ 483029 string characters out of 5726500
+ 983393 words of memory out of 5000000
+ 44738 multiletter control sequences out of 15000+600000
  568432 words of font info for 75 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  116i,17n,121p,499b,1012s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/jacob/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/jacob/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/jacob/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx7.pfb><C:/Users/jacob/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx9.pfb><C:/Users/jacob/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/jacob/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/jacob/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/jacob/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/jacob/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/jacob/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/jacob/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/jacob/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/jacob/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/jacob/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/jacob/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/jacob/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/jacob/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Users/jacob/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/jacob/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/jacob/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Users/jacob/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on random-geometric-graphs.pdf (14 pages, 339659 bytes).
+Output written on random-geometric-graphs.pdf (16 pages, 354191 bytes).
 PDF statistics:
- 192 PDF objects out of 1000 (max. 8388607)
+ 198 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  157 words of extra memory for PDF output out of 10000 (max. 10000000)
 
