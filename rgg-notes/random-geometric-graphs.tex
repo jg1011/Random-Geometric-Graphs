@@ -9,6 +9,7 @@
 \usepackage{lipsum}
 \usepackage{mathtools}
 \usepackage{amsthm} % For proof environments only, labelling of thms done with custom counter
+\usepackage{amsmath}
 \usepackage{amssymb}
 
 %%% Misc commands %%%
@@ -28,76 +29,96 @@ random geometric graph theory and related topics.}
 \newcommand{\institution}{Department of Mathematical Sciences, The University of Bath}
 \newcommand{\keywords}{Random geometric graphs, Poisson Point Processes, Combinatorial Geometry, Sphere Packing}
 
-\newcounter{globaltcb} % tcolorbox counter, for ease of self-reference
+\newcounter{definitioncount} % tcolorbox counter, for ease of self-reference
+\newcounter{lemmacount}
+\newcounter{examplecount}
+\newcounter{theoremcount}
+\newcounter{propositioncount}
+\newcounter{corollarycount}
+\newcounter{remarkcount}
+\counterwithin{corollarycount}{section}
+\counterwithin{propositioncount}{section}
+\counterwithin{remarkcount}{section}
+\counterwithin{theoremcount}{section}
+\counterwithin{examplecount}{section}
+\counterwithin{lemmacount}{section}
+\counterwithin{definitioncount}{section}
+\renewcommand{\thecorollarycount}{\thesection.\arabic{corollarycount}}
+\renewcommand{\thepropositioncount}{\thesection.\arabic{propositioncount}}
+\renewcommand{\theremarkcount}{\thesection.\arabic{remarkcount}}
+\renewcommand{\thetheoremcount}{\thesection.\arabic{theoremcount}}
+\renewcommand{\theexamplecount}{\thesection.\arabic{examplecount}}
+\renewcommand{\thelemmacount}{\thesection.\arabic{lemmacount}}
+\renewcommand{\thedefinitioncount}{\thesection.\arabic{definitioncount}}
 \newcounter{claimcount} % Used for proof with lots of claims
 
-\newtcolorbox{definition}[2][use counter=globaltcb, number within=section]{
+\newtcolorbox{definition}[2][auto counter, number within=section]{
   colback=black!5!white, 
   colframe=black!50!white, 
   fonttitle=\bfseries, 
   coltitle=black,
-  title=Definition \arabic{section}.\arabic{globaltcb} (#2), 
-  before upper={\refstepcounter{globaltcb}},
+  title=Definition \thedefinitioncount $\:$ (#2), 
+  before upper = \refstepcounter{definitioncount},
   #1, % Optional params
 }
 
-\newtcolorbox{lemma}[2][use counter=globaltcb, number within=section]{
+\newtcolorbox{lemma}[2][auto counter, number within=section]{
   colback=blue!5!white, 
   colframe=blue!50!white, 
   fonttitle=\bfseries, 
   coltitle=black, 
-  title=Lemma \arabic{section}.\arabic{globaltcb} (#2), 
-  before upper={\refstepcounter{globaltcb}},
+  title=Lemma \thelemmacount $\:$ (#2),
+  before upper = \refstepcounter{lemmacount} 
   #1, % Optional params
 }
 
-\newtcolorbox{example}[2][use counter=globaltcb, number within=section]{
+\newtcolorbox{example}[2][auto counter, number within=section]{
   colback=green!5!white, 
   colframe=green!50!white, 
   fonttitle=\bfseries, 
   coltitle=black, 
-  title=Example \arabic{section}.\arabic{globaltcb} (#2), 
-  before upper={\refstepcounter{globaltcb}},
+  title=Example \theexamplecount $\:$ (#2), 
+  before upper = \refstepcounter{examplecount}
   #1, % Optional params
 }
 
-\newtcolorbox{theorem}[2][use counter=globaltcb, number within=section]{
+\newtcolorbox{theorem}[2][auto counter, number within=section]{
   colback=red!5!white,
   colframe=red!50!white, 
   fonttitle=\bfseries, 
   coltitle=black, 
-  title=Theorem \arabic{section}.\arabic{globaltcb} (#2), 
-  before upper={\refstepcounter{globaltcb}},
+  title=Theorem \thetheoremcount $\:$ (#2), 
+  before upper = \refstepcounter{theoremcount},
   #1, % Optional params
 }
 
-\newtcolorbox{proposition}[2][use counter=globaltcb, number within=section]{
+\newtcolorbox{proposition}[2][auto counter, number within=section]{
   colback=purple!5!white,
   colframe=purple!50!white, 
   fonttitle=\bfseries, 
   coltitle=black, 
-  title=Proposition \arabic{section}.\arabic{globaltcb} (#2), 
-  before upper={\refstepcounter{globaltcb}},
+  title=Proposition \thepropositioncount $\:$ (#2), 
+  before upper = \refstepcounter{propositioncount},
   #1, % Optional params
 }
 
-\newtcolorbox{corollary}[2][use counter=globaltcb, number within=section]{
+\newtcolorbox{corollary}[2][auto counter, number within=section]{
   colback=yellow!5!white,
   colframe=yellow!50!white, 
   fonttitle=\bfseries, 
   coltitle=black, 
-  title=Corollary \arabic{section}.\arabic{globaltcb} (#2), 
-  before upper={\refstepcounter{globaltcb}},
+  title=Corollary \thecorollarycount $\:$ (#2),
+  before upper = \refstepcounter{corollarycount}, 
   #1, % Optional params
 }
 
-\newtcolorbox{remark}[2][use counter=globaltcb, number within=section]{
+\newtcolorbox{remark}[2][auto counter, number within=section]{
   colback=black!5!white,
   colframe=black!50!white, 
   fonttitle=\bfseries, 
   coltitle=black, 
-  title=Remark \arabic{section}.\arabic{globaltcb} (#2), 
-  before upper={\refstepcounter{globaltcb}},
+  title=Remark \theremarkcount $\:$ (#2),
+  before upper = \refstepcounter{remarkcount}, 
   #1, % Optional params
 }
 
@@ -164,7 +185,14 @@ random geometric graph theory and related topics.}
 
 \section{Introduction}
 
-\setcounter{globaltcb}{1} % Reset box counter.
+% Count over naturals
+\setcounter{lemmacount}{1}
+\setcounter{examplecount}{1}
+\setcounter{theoremcount}{1}
+\setcounter{propositioncount}{1}
+\setcounter{corollarycount}{1}
+\setcounter{remarkcount}{1}
+\setcounter{definitioncount}{1}
 
 \subsection{What is a random geometric graph?}
 
@@ -424,165 +452,44 @@ Rest follows on from Exercise (2.2), too small brained to figure it out right no
 
 \newpage
 
-\section{Appendices}
+\section{Sphere packing with random geometric graphs}
 
-\subsection{Appendix A: Poisson Point Processes}
+% Count over naturals
+\setcounter{lemmacount}{1}
+\setcounter{examplecount}{1}
+\setcounter{theoremcount}{1}
+\setcounter{propositioncount}{1}
+\setcounter{corollarycount}{1}
+\setcounter{remarkcount}{1}
+\setcounter{definitioncount}{1}
 
-For a full treatment, consult \cite{Last_Penrose_2017}. Here I will simply give the relevent definitions and 
-results from this text, leaving proofs (unless containing a particularly important idea) to \cite{Last_Penrose_2017}.
+We denote the maximal density unit-volume sphere packing in $\mathbb{R}^d$ by $\theta(d)$. Formally, we call 
+a collection of points $\mathcal{P} \subset \mathbb{R}^d$ a {\it packing} if $\lVert x - y \rVert_2 \geq 2r_d$ for 
+all $x,y \in \mathcal{P}$, where $r_d$ is the radius of the unit-volume $d$-dimensional hypersphere. Letting 
+${\bf \mathcal{P}}$ be the collection of all packings in $\mathbb{R}^d$, we may define 
+\[\theta(d) := \sup_{\mathcal{P} \in {\bf \mathcal{P}}} \limsup_{R \to \infty}
+\frac{|\mathcal{P} \cap B_{{\bf 0}}(R)|}{\text{Vol}(B_{{\bf 0}}(R))}\]
+where $\text{Vol}(\cdot)$ is the Lebesgue measure in $\mathbb{R}^d$ and $B_0(R)$ is the ball radius $R$ centred at 
+${\bf 0} \in \mathbb{R}^d$. 
 
-\begin{definition}[]{point process}
-    Let $(\mathbb{X}, \mathcal{X})$ be a measure space and let ${\bf N}(\mathbb{X}) \equiv {\bf N}$ be the family 
-    of measures that can be written as a countable sum of finite measures on $\mathbb{X}$ with image in $\mathbb{N}_0$. 
-    Let ${\bf \mathcal{N}}(\mathbb{X}) \equiv {\bf \mathcal{N}}$ be the $\sigma$-algebra generated by the collection 
-    of subsets $\{\mu \in {\bf N} : \mu(A) = k\}$ over $A \in \mathcal{X}, k \in \mathbb{N}_0$. A {\it point process}
-    on $\mathbb{X}$ is a random element $\eta$ of the measure space $({\bf N}, {\bf \mathcal{N}})$
-\end{definition}
+\subsection{A new bound for sphere packing in $\mathbb{R}^d$ as $d \to \infty$}
 
-\begin{definition}[]{Poisson point process}
-    Let $\mathbb{X}$ be a space and $\lambda$ an s-finite measure on $\mathbb{X}$. A {\it Poisson point process} 
-    with intensity measure $\lambda$ is a point process $\eta$ on $\mathbb{X}$ with
-    \begin{enumerate}[(i)]
-        \item $\eta(A) \sim \text{Poisson}(\lambda(A))$, that is $\eta(A)$ is Poisson with parameter $\lambda(A)$
-        \item If $A_1, \dots, A_n \in \mathbb{X}$ are pairwise disjoint then $\eta(A_1), \dots, \eta(A_n)$ 
-        are independent.
-    \end{enumerate}
-\end{definition}
-
-\newpage
-
-\subsection{Appendix B: Existence Of High Density Packings}
-
-Here I take some notes on chapter 7 of Pach $\&$ Agarwals combinatorial geometry [WILEY GIVES BAD CITATION], 
-hoping to find bridges between random geometric graphs and combinatorial geometry. \\ 
-
-As the title suggests, we spend this section looking for the existence of high density packings in $\mathbb{R}^d$. 
-We take a non construct approach, instead turning to the probabilistic method. For a convex body $C \subset \mathbb{R}^d$, 
-denote the maximal packing (respectively, minimal covering) density by $\delta(C)$ (respectively, $\vartheta(C)$). \\
-
-Let us first consider $C = B^d \subset \mathbb{R}^d$, the $d$-dimensional ball. Then one has the following easy 
-observation. 
-
-\begin{proposition}[]{easy lower bound for $\delta(B^d)$}
-    Let $B^d \subset \mathbb{R}$ be the $d$-dimensional unit ball. Then, 
-    \[\delta(B^d) \geq 2^{-d}\vartheta(B^d) \geq 2^{-d}\]
-\end{proposition}
-
-\begin{proof}
-    The latter inequality is trivial ($\vartheta(C) \geq 1$). For the former, let us consider a {\it saturated 
-    packing} $\mathcal{B} = \{B^d + c_i | i \in \mathbb{N}\}$ (that is, a packing such that 
-    no body can be added without intersecting a pre-existing body) and the factor 2 enlargement 
-    $\mathcal{B}^\prime = \{2B^d + c_i | i \in \mathbb{N}\}$.
-    \begin{claim}
-        $\mathcal{B}^\prime$ is a covering of $\mathbb{R}^d$.
-    \end{claim}
-    \begin{proof}[Proof of claim]
-        Suppose $x \notin \cup_{B \in \mathcal{B}^\prime} B$. Then we have $\lvert x - c_i \rvert > 2$ for each $i \geq 1$, 
-        which gives \[(B^d + c_i) \cap (B^d + x) = \emptyset, \quad i \geq 1\] Contradiction!
-    \end{proof}
-    Hence, letting $d(C, \mathbb{R}^d)$ denote the density of a body $C$ in $\mathbb{R}^d$, we clearly have 
-    \[\vartheta(B^d) \leq d(\mathcal{B}^\prime, \mathbb{R}^d) = 2^d d(\mathcal{B}, \mathbb{R}^d) \leq 2^d \delta(B^d)\] 
-    and the result is proven. 
-\end{proof}
-
-In high dimensional Euclidean space, this trivial bound was the best bound known, up to a constant, for a long 
-time! In fact, no construction of saturated lattice packings of balls is known (again, in high dimensional space), worth 
-checking if this has changed since time of writing. This is surprising, given the obvious drawbacks of this argument. 
-If we saturate a packing by continuously adding balls, we can't control the structure of this packing. \\ 
-
-Let $\delta_L(C)$ be the maximal lattice packing density of $C$ into $\mathbb{R}^d$. Using techniques developed by 
-Minkowski and Hlawka, we can prove $\delta_L(B^d) > 2^{-d}$. Namely, we can affirm the existence of a lattice packing 
-strictly outperforming our previously derived lower bound of $2^{-d}$.  
-
-\begin{definition}[]{star-shaped body}
-    Let $C \subset \mathbb{R}^d$ be compact. We call $C$ a {\it star-shaped body} if ${\bf 0}$ is in the interior 
-    of $C$ and has the relation ${\bf x} \in C \Rightarrow \lambda {\bf x} \in C$ for all $\lambda \in [0, 1]$.
-\end{definition}
-
-\begin{definition}[]{admissible latice}
-    Let $\Lambda = \Lambda(u_1, \dots, u_d) = \{m_1 u_1 + \cdots + m_d u_d | m_1, \dots, m_d \in \mathbb{Z}\}$ be a 
-    lattice in $\mathbb{R}^d$ and let $C$ be a star-shaped body. Then $\Lambda$ is said to be {\it admissible} for 
-    $C$ if it contains no interior point of $C\setminus \{{\bf 0}\}$.
-\end{definition}
-
-\begin{definition}[]{critical determinant}
-    Let $C$ be a star-shaped body. The {\it critical determinant} of $C$ is defined by 
-    \[\Delta(C) := \inf \{\det \Lambda | \Lambda \text{ is admissible for } C\}\]
-\end{definition}
-
-\begin{lemma}[]{Mahler selection theorem - 1946}
-    Let $\Lambda_1, \Lambda_2, \dots$ be an infinite sequence of lattices in $\mathbb{R}^d$ that have constants 
-    $\alpha, \beta > 0$ satisfying, for $i \geq 1$, 
-    \begin{enumerate}[(i)]
-        \item $\Lambda_i$ is admissible for $\alpha B^d$
-        \item $\det \Lambda_i \leq \beta$
-    \end{enumerate}
-    Then we can select a convergent subsequence $\Lambda_{i_1}, \Lambda_{i_2}, \dots \to \Lambda$.
-\end{lemma}
-
-\begin{proof}
-    Given as exercise, solve at some point.
-\end{proof}
-
-This lemma allows us to prove that the infimum is obtained (verify this also), giving us the following reformulation
-of Minkowski's fundamental theorem (or as I prefer, Minkowski's pidgeonhole principle).
-
-\begin{theorem}[]{Minkowski's critical determinant lower bound}
-    For any centrally symmetric convex body $C \subset \mathbb{R}^d$, 
-    \[\frac{\Delta(C)}{\text{vol}C} \geq \frac{1}{2^d}\]
-\end{theorem}
-
-Finding an upper bound for the ratio $\Delta(C)/\text{vol}C$ turns out the be much harder. Minkowski was able to 
-give an upper bound, when $C = B^d$, of $\frac{1}{2}(\zeta(d))^{-1}$ where $\zeta(\cdot)$ is the Reimman zeta function.
-We prove, thanks to Hlawka, a generalisation of Minkowski's result. 
-
-\begin{lemma}[]{Davenport $\&$ Rogers}
-    Let $f:\mathbb{R}^d \to \mathbb{R}$ be a continuous map that vanishes outside of some bounded region. For $\gamma
-    \in \mathbb{R}$ set \[V(\gamma) := \int_{\mathbb{R}}\cdots\int_{\mathbb{R}}f(x_1, \dots, x_{d-1}, \gamma)\mathrm{d}x_1 \cdots \mathrm{d}x_{d-1}\] 
-    Fix $\delta > 0$ and let $\Lambda^\prime$ be the integer lattice in the hyperplane $x_d = 0$. For a vector $y \in \mathbb{R}^d$ 
-    of the form $y = (y_1, \dots, y_{d-1}, \delta)$ define $\Lambda_y$ as the lattice generated by $y$ and $\Lambda^\prime$. 
-    Then, \[\int_{0}^1 \cdots \int_{0}^1 \left(\sum_{x \in \Lambda_y, x_d \neq 0}f(x)\right)\mathrm{d}y_1 \cdots \mathrm{d}y_{d-1} 
-    = \sum_{i \in Z\setminus \{0\}}V(i \delta)\]
-\end{lemma}
-
-\begin{proof}
-    Looks like a routine computation but theres one line dependent on voodoo magic, can't wrap my head around it :(
-\end{proof}
-
-Now for our generalisation. We work, as suggested, with the probabilistic method. 
-
-\begin{theorem}[]{Hlawka's theorem}
-    Let $f: \mathbb{R}^d \to \mathbb{R}$ be a bounded Reimann integrable function that vanishes outside of some bounded
-    region and let $\epsilon > 0$. Then there exists a unit lattice $\Lambda$ in $\mathbb{R}^d$ with 
-    \[\sum_{{\bf 0} \neq x \in \Lambda}f(x) < \int_{\mathbb{R}^d}f(x)\mathrm{d}x + \epsilon\]
-\end{theorem} 
-
-\begin{proof}
-
-\end{proof}
-
-\newpage 
-
-\subsection{Appendix C: A new bound for sphere packing in $\mathbb{R}^d$ as $d \to \infty$}
-
-Notes based off of \cite{campos2023}. Campos utilises a Poisson random geometric graph to improve Hayes' 1947 
-bound on the density of the sphere packing problem in high dimensional $\mathbb{R}^d$ by a factor of $\log d$. \\
-
-We denote the maximal density unit-volume sphere packing in $\mathbb{R}^d$ by $\theta(d)$. In this note, we follow 
-the work of Campos et al to prove $\theta(d) \to (1 - o(1))\frac{d\log d}{2^{d+1}}$ as $d \to \infty$. It is worth 
-noting that this is still an exponential factor behind the best upper bound, which currently is $2^{(-0.599\cdots + o(1))d}$.
-An explicit value of $\theta(d)$ is only known for $d \in \{1,2,3,8,24\}$. 
+In this note, we follow the work of Campos $\&$ Co to prove $\theta(d) \to (1 - o(1))\frac{d\log d}{2^{d+1}}$ as 
+$d \to \infty$. Campos $\&$ Co utilis a Poisson random geometric graph to improve Hayes' 1947 bound on the maximal density 
+of a sphere packing in high dimensional $\mathbb{R}^d$ by a factor of $\log d$. It is worth noting that this is still 
+an exponential factor behind the best upper bound, which currently is $2^{(-0.599\cdots + o(1))d}$. The explicit 
+value of $\theta(d)$ is only known for $d \in \{1,2,3,8,24\}$. 
 
 \begin{theorem}[]{$\theta(d)$ bound / theorem 1.1 in \cite{campos2023}}
     As $d \to \infty$, one has \[\theta(d) \geq (1 - o(1))\frac{d\log d}{2^{d+1}}\] 
 \end{theorem}
 
-Of particular importance is the structural irregularity of the packings used to prove this theorem. Previous work 
+Of particular interest is the structural irregularity of the packings used to prove this theorem. Previous work 
 relied on lattice packings, whereas this work constructs packings by recursively adding random spheres to $\mathbb{R}^d$
 that are centred on points of an appropriately modified Poisson process. \\
 
 Campos $\&$ Co also managed to adapt their techniques to the problem of spherical codes. I will elect to leave that 
-to their paper (see thm1.2 \cite{campos2023}).
+to their paper (see Theorem 1.2 $\&$ Appendix A. in \cite{campos2023}).
 
 \subsubsection*{Proof of $\theta(d)$ bound}
 
@@ -594,17 +501,18 @@ Here I describe the method.
     \item Bound $\alpha(G)$, the largest independent set in $G$. 
 \end{enumerate}
 
-In regards to step (4) we have the following new tool, certainly of independent interest. Let $\Delta(G)$ be the 
-maximum vertex degree and let $\Delta_\text{co}(G)$ denote the maximum codegree (that is, the maximal size of 
-$|\mathcal{N}(u)\cap \mathcal{N}(v)|$ over vertices $u, v \in V$). 
+In regards to step (iv) we have the following new tool, certainly of independent interest. Let $\Delta(G)$ be the 
+maximum vertex degree in a graph $G$ and let $\Delta_\text{co}(G)$ denote the maximum codegree (that is, the maximal 
+size of $|\mathcal{N}(u)\cap \mathcal{N}(v)|$ over vertices $u, v \in V$). 
 
 \begin{theorem}[]{$\alpha(G)$ bound / theorem 1.3 in \cite{campos2023}}
     Let $G$ be a graph on $n$ vertices with $\Delta(G) \leq \Delta$ and $\Delta_\text{co}(G) \leq C\Delta (\log \Delta)^{-c}$. 
     Then, \[\alpha(G) \geq (1 - o(1))\frac{n \log \Delta}{\Delta}\] where $o(1) \to 0$ as $\Delta \to \infty$.
 \end{theorem}
 
-In fact, one can take $C = 2^{-7}$ and $c = 7$. In fact, this bound is sharp up to some constants $c$ and $C$. To see 
-this, $\dots$ [Not sure I fully get this]. \\
+In fact, one can take $C = 2^{-7}$ and $c = 7$. \\
+
+This bound is sharp up to some constants $c$ and $C$. To see this, $\dots$ [Not sure I fully get this, pls fix]. \\
 
 With this tool, the proof of our $\theta(d)$ bound is remarkably easy. We just need the following lemma. 
 
@@ -617,7 +525,7 @@ With this tool, the proof of our $\theta(d)$ bound is remarkably easy. We just n
 
 \begin{proof}[Proof of $\theta(d)$ bound / Theorem 1.1 in \cite{campos2023}]
     Fix $R > 0$ and set $\Omega = B_{{\bf 0}}(R)$. It suffices to prove that we can place \[(1 - o(1))\text{Vol}(\Omega)
-    \frac{d\log d}{2^{d+1}}\] points each at pairwise distance less than $2r^d$. The previous lemma 
+    \frac{d\log d}{2^{d+1}}\] points each at pairwise distance at least $2r^d$. The previous lemma 
     gives us $X \subset \Omega$ with \[|X| \geq (1-o(1))\text{Vol}(\Omega)\Delta 2^{-d}\] with $G(X, 2r_d)$ satisfying 
     the conditions of our $\alpha(G)$ bound. Applying this gives an independent set $I$ with \[|I| \geq (1-o(1))
     \frac{|X|\log \Delta}{\Delta} \geq (1-o(1))\text{Vol}(\Omega)\frac{d\log d}{2^{d+1}}\] and we're done.
@@ -732,7 +640,7 @@ Now we do the same with the codegree, which will take more work.
         &\leq \lambda \text{Vol}(B_x(4r_d)) \; \times \; \max_{y \in \Omega^\prime}\mathbb{P}(X_{x,y} \geq \eta \Delta - 2) \\
         &= \mathbb{E}[X \cap B_x(4r_d)] \; \times \; \max_{y \in \Omega^\prime}\mathbb{P}(X_{x,y} \geq \eta \Delta - 2)
     \end{align*}
-    Now some annoying abounding gives the same $\frac{1}{4d}$ upper bound. Gonna eat lunch then type this up.
+    Now some annoying bounding gives the same $\frac{1}{4d}$ upper bound. Gonna eat lunch then type this up.
 \end{proof}
 
 \begin{remark}[]{on claim 1}
@@ -749,7 +657,7 @@ Now we do the same with the codegree, which will take more work.
 
 Now we may finally prove our original lemma, lemma 2.26 / lemma 2.1 in \cite{campos2023}. 
 
-\begin{proof}[Proof of lemma 2.26]
+\begin{proof}[Proof of lemma 2.1]
     Set $S_1$ be the collection of points with high degree and $S_2$ those with high codegree (i.e. the left/right 
     conditions in $(\heartsuit)$) and $X = \mathcal{X} \setminus (S_1 \cup S_2)$ the space without these ``bad'' points.
     Then,
@@ -762,9 +670,9 @@ Now we may finally prove our original lemma, lemma 2.26 / lemma 2.1 in \cite{cam
     Where was $d \geq 1000$ used? I can only spot a $d \geq 4$ in the use of Stirling's. Worth checking.
 \end{remark}
 
-\subsubsection*{Controlling degrees and Codegrees}
+\subsubsection*{Nibbling on almost-uniform graphs}
 
-We now introduce the {\it R\"{o}dl nibble}, which will be the key to our proof of thm 1.3. 
+We now introduce the so called {\it R\"{o}dl nibble}, which will be the key to our proof of thm 1.3. \\
 
 Throughout this (sub)section, we make the following assumptions. 
 \[d_G(v) \in \{\Delta -1, \Delta\}, \; \Delta_{\text{co}}(G) \leq \eta \Delta, \; \Delta \geq 1, \; 
@@ -793,7 +701,10 @@ mean degree/codegree after each nibble.
     \mathbb{E}[d_{G^\prime}(u, v) | u, v \in V(G^\prime)] \leq (1 - \gamma + \gamma^2)d_G(u, v)\]
 \end{lemma}
 
-We just prove the mean degree result, noting the proof for the codegree is almost identical.
+We just prove the mean degree result, noting the proof for the codegree is almost identical. \\
+
+The idea is to look individually at vertices in $\mathcal{N}_G(v)$, given $v$ is not ``eaten'', and to bound the 
+probability this vertex survives the ``nibble''.
 
 \begin{proof}
      Conditioned on the fact $v \in V(G^\prime)$, we know that $A$ is a $(\gamma/\Delta)$-random subset of 
@@ -803,8 +714,175 @@ We just prove the mean degree result, noting the proof for the codegree is almos
      = d_G(w) - d_G(w, v) - 1\]
      (where the $-1$ comes from $w \in \mathcal{N}_G(v)$), so by our setup we may bound 
      \[d_w \geq (\Delta - 1) - \eta\Delta - 1 \geq \ (1 - \gamma^2/8)\Delta - 2\]
-     [SLIGHTLY OFF ON LAST BOUND THERE, CHECK PAPER AND SEE HOW TO GO FROM A -> B].
+     [SLIGHTLY OFF ON LAST BOUND, SHOULD ARRIVE AT $(1 - \gamma^2/2)\Delta$]. \\
+     For $w \in V(G^\prime)$ to be true (conditioned on $v \in V(G^\prime)$), we need none of the $w^\prime \in 
+     \mathcal{N}_G(w) \setminus (\mathcal{N}_G(v) \cup \{v\})$ to be ``eaten''. Hence, 
+     \[\mathbb{P}(w \in V(G^\prime) | v \in V(G^\prime)) = \left(1 - \frac{\gamma}{\Delta}\right)^{d_w}\]
+     which, using $d_w \in \mathbb{N}_0$ and the Binomial theorem, gives 
+     \[\mathbb{P}(w \in V(G^\prime) | v \in V(G^\prime)) \leq 1 - \frac{\gamma}{\Delta}d_w + \frac{\gamma^2}{2\Delta^2}d_w
+     \leq 1 - \gamma + \gamma^2\] where we used $(1-\gamma^2/2)\Delta \leq d_w \leq \Delta$ in the final deduction. 
+     Now we may just sum over $w \in \mathcal{N}_G(v)$ to obtain the final result.
 \end{proof}
+
+We now state a one sided version of Freedman's inequality (a martingale generalisation of one of the Bernstein 
+inequalities), courtesy of Chung $\&$ Lu. 
+
+\begin{proposition}[]{Chung $\&$ Lu concentration inequality / Theorem 3.3 in \cite{campos2023}}
+    Let $(S_i)_{i=0}^n$ be a martingale with respect to a filtration $(\mathcal{F}_i)_{i=0}^n$. Suppose $(S_i)$ 
+    has increments $(\xi_j)_{j=1}^n$ with $\xi_j \leq R_j$ and $\mathbb{E}[|\xi_j|^2 | \mathcal{F}_j] \leq \sigma_i^2$ 
+    almost surely. Then, for all $a \geq 0$, \[\mathbb{P}(S_n - S_0 \geq a) 
+    \leq \exp\left(-\frac{a^2}{2\sum_{i=1}^n(R_i^2 + \sigma_i^2)}\right)\]
+\end{proposition}
+
+\newpage
+
+\section{Appendices}
+
+% Count over naturals
+\setcounter{lemmacount}{1}
+\setcounter{examplecount}{1}
+\setcounter{theoremcount}{1}
+\setcounter{propositioncount}{1}
+\setcounter{corollarycount}{1}
+\setcounter{remarkcount}{1}
+\setcounter{definitioncount}{1}
+
+\subsection{Appendix A: Poisson Point Processes}
+
+For a full treatment, consult \cite{Last_Penrose_2017}. Here I will simply give the relevent definitions and 
+results from this text, leaving proofs (unless containing a particularly important idea) to \cite{Last_Penrose_2017}.
+
+\begin{definition}[]{point process}
+    Let $(\mathbb{X}, \mathcal{X})$ be a measure space and let ${\bf N}(\mathbb{X}) \equiv {\bf N}$ be the family 
+    of measures that can be written as a countable sum of finite measures on $\mathbb{X}$ with image in $\mathbb{N}_0$. 
+    Let ${\bf \mathcal{N}}(\mathbb{X}) \equiv {\bf \mathcal{N}}$ be the $\sigma$-algebra generated by the collection 
+    of subsets $\{\mu \in {\bf N} : \mu(A) = k\}$ over $A \in \mathcal{X}, k \in \mathbb{N}_0$. A {\it point process}
+    on $\mathbb{X}$ is a random element $\eta$ of the measure space $({\bf N}, {\bf \mathcal{N}})$
+\end{definition}
+
+\begin{definition}[]{Poisson point process}
+    Let $\mathbb{X}$ be a space and $\lambda$ an s-finite measure on $\mathbb{X}$. A {\it Poisson point process} 
+    with intensity measure $\lambda$ is a point process $\eta$ on $\mathbb{X}$ with
+    \begin{enumerate}[(i)]
+        \item $\eta(A) \sim \text{Poisson}(\lambda(A))$, that is $\eta(A)$ is Poisson with parameter $\lambda(A)$
+        \item If $A_1, \dots, A_n \in \mathbb{X}$ are pairwise disjoint then $\eta(A_1), \dots, \eta(A_n)$ 
+        are independent.
+    \end{enumerate}
+\end{definition}
+
+\newpage
+
+\subsection{Appendix B: Existence Of High Density Packings}
+
+Here I take some notes on chapter 7 of Pach $\&$ Agarwals combinatorial geometry [WILEY GIVES BAD CITATION], 
+hoping to find bridges between random geometric graphs and combinatorial geometry. \\ 
+
+As the title suggests, we spend this section looking for the existence of high density packings in $\mathbb{R}^d$. 
+We take a non construct approach, instead turning to the probabilistic method. For a convex body $C \subset \mathbb{R}^d$, 
+denote the maximal packing (respectively, minimal covering) density by $\delta(C)$ (respectively, $\vartheta(C)$). \\
+
+Let us first consider $C = B^d \subset \mathbb{R}^d$, the $d$-dimensional ball. Then one has the following easy 
+observation. 
+
+\begin{proposition}[]{easy lower bound for $\delta(B^d)$}
+    Let $B^d \subset \mathbb{R}$ be the $d$-dimensional unit ball. Then, 
+    \[\delta(B^d) \geq 2^{-d}\vartheta(B^d) \geq 2^{-d}\]
+\end{proposition}
+
+\begin{proof}
+    The latter inequality is trivial ($\vartheta(C) \geq 1$). For the former, let us consider a {\it saturated 
+    packing} $\mathcal{B} = \{B^d + c_i | i \in \mathbb{N}\}$ (that is, a packing such that 
+    no body can be added without intersecting a pre-existing body) and the factor 2 enlargement 
+    $\mathcal{B}^\prime = \{2B^d + c_i | i \in \mathbb{N}\}$.
+    \begin{claim}
+        $\mathcal{B}^\prime$ is a covering of $\mathbb{R}^d$.
+    \end{claim}
+    \begin{proof}[Proof of claim]
+        Suppose $x \notin \cup_{B \in \mathcal{B}^\prime} B$. Then we have $\lvert x - c_i \rvert > 2$ for som $i \geq 1$, 
+        which gives \[(B^d + c_i) \cap (B^d + x) = \emptyset\] Contradiction!
+    \end{proof}
+    Hence, letting $d(C, \mathbb{R}^d)$ denote the density of a body $C$ in $\mathbb{R}^d$, we clearly have 
+    \[\vartheta(B^d) \leq d(\mathcal{B}^\prime, \mathbb{R}^d) = 2^d d(\mathcal{B}, \mathbb{R}^d) \leq 2^d \delta(B^d)\] 
+    and the result is proven. 
+\end{proof}
+
+In high dimensional Euclidean space, this trivial bound was the best bound known, up to a constant, for a long 
+time! In fact, no construction of saturated lattice packings of balls is known (again, in high dimensional space), worth 
+checking if this has changed since time of writing. This is surprising, given the obvious drawbacks of this argument. 
+If we saturate a packing by continuously adding balls, we can't control the structure of this packing. \\ 
+
+Let $\delta_L(C)$ be the maximal lattice packing density of $C$ into $\mathbb{R}^d$. Using techniques developed by 
+Minkowski and Hlawka, we can prove $\delta_L(B^d) > 2^{-d}$. Namely, we can affirm the existence of a lattice packing 
+strictly outperforming our previously derived lower bound of $2^{-d}$.  
+
+\begin{definition}[]{star-shaped body}
+    Let $C \subset \mathbb{R}^d$ be compact. We call $C$ a {\it star-shaped body} if ${\bf 0}$ is in the interior 
+    of $C$ and has the relation ${\bf x} \in C \Rightarrow \lambda {\bf x} \in C$ for all $\lambda \in [0, 1]$.
+\end{definition}
+
+\begin{definition}[]{admissible latice}
+    Let $\Lambda = \Lambda(u_1, \dots, u_d) = \{m_1 u_1 + \cdots + m_d u_d | m_1, \dots, m_d \in \mathbb{Z}\}$ be a 
+    lattice in $\mathbb{R}^d$ and let $C$ be a star-shaped body. Then $\Lambda$ is said to be {\it admissible} for 
+    $C$ if it contains no interior point of $C\setminus \{{\bf 0}\}$.
+\end{definition}
+
+\begin{definition}[]{critical determinant}
+    Let $C$ be a star-shaped body. The {\it critical determinant} of $C$ is defined by 
+    \[\Delta(C) := \inf \{\det \Lambda | \Lambda \text{ is admissible for } C\}\]
+\end{definition}
+
+\begin{lemma}[]{Mahler selection theorem - 1946}
+    Let $\Lambda_1, \Lambda_2, \dots$ be an infinite sequence of lattices in $\mathbb{R}^d$ that have constants 
+    $\alpha, \beta > 0$ satisfying, for $i \geq 1$, 
+    \begin{enumerate}[(i)]
+        \item $\Lambda_i$ is admissible for $\alpha B^d$
+        \item $\det \Lambda_i \leq \beta$
+    \end{enumerate}
+    Then we can select a convergent subsequence $\Lambda_{i_1}, \Lambda_{i_2}, \dots \to \Lambda$.
+\end{lemma}
+
+\begin{proof}
+    Given as exercise, solve at some point.
+\end{proof}
+
+This lemma allows us to prove that the infimum is obtained (verify this also), giving us the following reformulation
+of Minkowski's fundamental theorem (or as I prefer, Minkowski's pidgeonhole principle).
+
+\begin{theorem}[]{Minkowski's critical determinant lower bound}
+    For any centrally symmetric convex body $C \subset \mathbb{R}^d$, 
+    \[\frac{\Delta(C)}{\text{vol}C} \geq \frac{1}{2^d}\]
+\end{theorem}
+
+Finding an upper bound for the ratio $\Delta(C)/\text{vol}C$ turns out the be much harder. Minkowski was able to 
+give an upper bound, when $C = B^d$, of $\frac{1}{2}(\zeta(d))^{-1}$ where $\zeta(\cdot)$ is the Reimman zeta function.
+We prove, thanks to Hlawka, a generalisation of Minkowski's result. 
+
+\begin{lemma}[]{Davenport $\&$ Rogers}
+    Let $f:\mathbb{R}^d \to \mathbb{R}$ be a continuous map that vanishes outside of some bounded region. For $\gamma
+    \in \mathbb{R}$ set \[V(\gamma) := \int_{\mathbb{R}}\cdots\int_{\mathbb{R}}f(x_1, \dots, x_{d-1}, \gamma)\mathrm{d}x_1 \cdots \mathrm{d}x_{d-1}\] 
+    Fix $\delta > 0$ and let $\Lambda^\prime$ be the integer lattice in the hyperplane $x_d = 0$. For a vector $y \in \mathbb{R}^d$ 
+    of the form $y = (y_1, \dots, y_{d-1}, \delta)$ define $\Lambda_y$ as the lattice generated by $y$ and $\Lambda^\prime$. 
+    Then, \[\int_{0}^1 \cdots \int_{0}^1 \left(\sum_{x \in \Lambda_y, x_d \neq 0}f(x)\right)\mathrm{d}y_1 \cdots \mathrm{d}y_{d-1} 
+    = \sum_{i \in Z\setminus \{0\}}V(i \delta)\]
+\end{lemma}
+
+\begin{proof}
+    Looks like a routine computation but theres one line dependent on voodoo magic, can't wrap my head around that 
+    bloody jump, but I imagine its something dumb I'm missing :(
+\end{proof}
+
+Now for our generalisation. We work, as suggested, with the probabilistic method. 
+
+\begin{theorem}[]{Hlawka's theorem}
+    Let $f: \mathbb{R}^d \to \mathbb{R}$ be a bounded Reimann integrable function that vanishes outside of some bounded
+    region and let $\epsilon > 0$. Then there exists a unit lattice $\Lambda$ in $\mathbb{R}^d$ with 
+    \[\sum_{{\bf 0} \neq x \in \Lambda}f(x) < \int_{\mathbb{R}^d}f(x)\mathrm{d}x + \epsilon\]
+\end{theorem} 
+
+\begin{proof}
+    Skill issue + lack of relevance. Moving onto non-lattice packings, if this becomes interesting again I'll revisit.
+\end{proof}
+
 \newpage
 
 %%% References

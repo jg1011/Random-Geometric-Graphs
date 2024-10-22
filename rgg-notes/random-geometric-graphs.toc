@@ -2,7 +2,8 @@
 \contentsline {subsection}{\numberline {1.1}What is a random geometric graph?}{1}{}%
 \contentsline {subsection}{\numberline {1.2}Counting Edges of $G(\mathcal {X}_n, r_n)$ and $G(\mathcal {P}_n, r_n)$}{2}{}%
 \contentsline {subsection}{\numberline {1.3}A central limit theorem for our edge counts}{5}{}%
-\contentsline {section}{\numberline {2}Appendices}{6}{}%
-\contentsline {subsection}{\numberline {2.1}Appendix A: Poisson Point Processes}{6}{}%
-\contentsline {subsection}{\numberline {2.2}Appendix B: Existence Of High Density Packings}{7}{}%
-\contentsline {subsection}{\numberline {2.3}Appendix C: A new bound for sphere packing in $\mathbb {R}^d$ as $d \to \infty $}{9}{}%
+\contentsline {section}{\numberline {2}Sphere packing with random geometric graphs}{6}{}%
+\contentsline {subsection}{\numberline {2.1}A new bound for sphere packing in $\mathbb {R}^d$ as $d \to \infty $}{6}{}%
+\contentsline {section}{\numberline {3}Appendices}{11}{}%
+\contentsline {subsection}{\numberline {3.1}Appendix A: Poisson Point Processes}{11}{}%
+\contentsline {subsection}{\numberline {3.2}Appendix B: Existence Of High Density Packings}{12}{}%
