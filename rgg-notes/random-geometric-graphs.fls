@@ -232,6 +232,8 @@ INPUT C:\Users\jacob\AppData\Local\Programs\MiKTeX\tex\latex\mathtools\mhsetup.s
 INPUT C:\Users\jacob\AppData\Local\Programs\MiKTeX\tex\latex\mathtools\mhsetup.sty
 INPUT C:\Users\jacob\AppData\Local\Programs\MiKTeX\tex\latex\amscls\amsthm.sty
 INPUT C:\Users\jacob\AppData\Local\Programs\MiKTeX\tex\latex\amscls\amsthm.sty
+INPUT C:\Users\jacob\AppData\Local\Programs\MiKTeX\tex\latex\base\textcomp.sty
+INPUT C:\Users\jacob\AppData\Local\Programs\MiKTeX\tex\latex\base\textcomp.sty
 INPUT .\random-geometric-graphs.aux
 INPUT .\random-geometric-graphs.aux
 INPUT random-geometric-graphs.aux
@@ -273,6 +275,7 @@ INPUT C:\Users\jacob\AppData\Local\Programs\MiKTeX\tex\latex\amsfonts\umsb.fd
 INPUT C:\Users\jacob\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
 INPUT C:\Users\jacob\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm7.tfm
 INPUT C:\Users\jacob\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm5.tfm
+INPUT C:\Users\jacob\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\tcrm1000.tfm
 OUTPUT random-geometric-graphs.toc
 INPUT C:\Users\jacob\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx12.tfm
 INPUT C:\Users\jacob\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx7.tfm
@@ -296,10 +299,15 @@ INPUT C:\Users\jacob\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\sym
 INPUT C:\Users\jacob\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
 INPUT C:\Users\jacob\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
 INPUT C:\Users\jacob\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm7.tfm
+INPUT C:\Users\jacob\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\tcbx1200.tfm
 INPUT .\random-geometric-graphs.bbl
 INPUT .\random-geometric-graphs.bbl
 INPUT random-geometric-graphs.bbl
 INPUT random-geometric-graphs.aux
+INPUT C:\Users\jacob\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcbx1200.pk
+INPUT C:\Users\jacob\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcbx1200.pk
+INPUT C:\Users\jacob\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm1000.pk
+INPUT C:\Users\jacob\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm1000.pk
 INPUT C:\Users\jacob\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx10.pfb
 INPUT C:\Users\jacob\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx10.pfb
 INPUT C:\Users\jacob\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx12.pfb
