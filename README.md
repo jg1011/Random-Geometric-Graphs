@@ -52,8 +52,8 @@ Various TO-DOs:
 - Finish bounding of rightmost term in sum (lemma 2.30) $\mathbb{E}|\{y \in X \setminus B_x(\log d) : I_{x,y} \geq \eta \Delta - 1\}|$
 - Look into remarks 2.31, 2.32 & 2.33
 
-Notes are currently up to (but not including) the proof of theorem 1.3. I'd like to understand this tool, particularly on the relevance of random graph theory vs just graph theory. R$\"{o}$dl nibble is cool ass idea. 
-    - Not particularly geometric, but very probabilistic method in graph theory-y
+Notes are currently up to (but not including) the proof of theorem 1.3. I'd like to understand this tool, particularly on the relevance of random graph theory vs just graph theory. Rödl nibble is cool :)
+    - Not particularly geometric, but a very nice application of the probabilistic method in combinatorics (in particular the method of alteration). 
 
 ### Misc
 - Fix claimcount numbering and devise a better system for the remaining counts
