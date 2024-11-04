@@ -33,7 +33,7 @@ All Todos are on CH7, the chapter of primary interest to me
 - Make jump to Minkowski-Hlawka theorem 
 
 It is worth noting this chapter takes a lattice approach to sphere packing, something likely to not 
-be optimal (or at least probably not beat Campos2023) but is of independent interest. 
+be optimal (or at least probably not beat Campos2023) in the high dimensional case. Regardless it is of independent interest.
 
 ### Campos 2023
 Campos & Co approach bounding sphere packing densities in high dimensional space with random geometric graphs & a new bound on the maximal independent set of a (fixed) graph. The first 3 steps in the methodology (of the proof of thm 1.1) were quite literally exactly what I had in mind. The advent of theorem 1.3 to bound the large independent set was creative, and I believe this proof, while being left temporarily, is of independent interest. 
